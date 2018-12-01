@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML><HEAD><TITLE>利润分析</TITLE>
+<SCRIPT language=JavaScript src="../js/date.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/xmlhttp.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/order.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/showphoto.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/addrow.js"></SCRIPT>
+
+<SCRIPT>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   
+oTr.tag   =   true;
+}
+}
+
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+
+function addtext(i_row)
+{
+document.getElementById("temp").value=document.getElementById('tbl').rows[i_row].cells[0].innerHTML;
+}
+
+function GetDIV(oobj,val_i)
+{
+if (oobj == 'block')
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+else
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+ document.getElementById("search_suggest").style.display=oobj;
+ document.getElementById("temp1").value = document.getElementById('tbl').rows[val_i].cells[0].innerHTML;
+ document.getElementById("search_suggest").style.top=event.clientY+20+document.body.scrollTop;
+ document.getElementById("search_suggest").style.left=event.clientX+20+document.body.scrollLeft;
+}
+
+function CreateReturnValue(closeWindow,i){
+j=window.opener.document.all.sqd.rows.length;
+newRow=window.opener.document.all.sqd.insertRow(-1)
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML=j
+window.opener.document.getElementById("rowcount").value=j
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=delNumber type=radio >"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodscode"+j+" type=text class=INPUT1 id=goodscode"+j+" size=8 onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsname"+j+" type=text class=INPUT1 id=goodsname"+j+"  size=16  onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsunit"+j+" type=text class=INPUT1 id=goodsunit"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=units"+j+" type=text class=INPUT1 id=units"+j+"  size=3>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=price"+j+" type=text class=INPUT1 id=price"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=number"+j+" type=text class=INPUT1 id=number"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=money"+j+" type=text class=INPUT1 id=money"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=remark"+j+" type=text class=INPUT1 id=remark"+j+"  size=20><input name=aveprice"+j+" type=hidden class=INPUT1 id=aveprice"+j+"  size=20><input name=fact_num"+j+" type=hidden id=fact_number"+j+">"
+var goodscode=window.opener.document.getElementById("goodscode"+j);
+var goodsname=window.opener.document.getElementById("goodsname"+j);
+var goodsunit=window.opener.document.getElementById("goodsunit"+j);
+var units=window.opener.document.getElementById("units"+j);
+var remark=window.opener.document.getElementById("remark"+j);
+var number=window.opener.document.getElementById("number"+j);
+var price=window.opener.document.getElementById("price"+j);
+var aveprice=window.opener.document.getElementById("aveprice"+j);
+var fact_num=window.opener.document.getElementById("fact_num"+j);
+goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+goodsunit.value=document.getElementById('tbl').rows[i].cells[2].innerText;
+units.value=document.getElementById('tbl').rows[i].cells[3].innerText;
+remark.value=document.getElementById('tbl').rows[i].cells[6].innerText;
+aveprice.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+fact_num.value=document.getElementById('tbl').rows[i].cells[7].innerText;	 
+number.value=1;
+if (""=="XS")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+}
+else if (""=="XD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+} 
+else if (""=="CG")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="CD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="in")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 	 
+else
+{
+price.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+}
+//document.getElementById('tbl').deleteRow(i);
+document.getElementById('tbl').rows[i].style.display="none";
+}
+</SCRIPT>
+
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="../css/style.css" type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY>
+<FORM id=form1 name=sample  method=post>
+<TABLE id=tbl_tittle width=610 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=right width="13%" height=24>仓库名称：</TD>
+    <TD width="26%"><SELECT name=depot><OPTION value="" 
+        selected></OPTION><OPTION value=库房>库房</OPTION></SELECT> </TD>
+    <TD width="9%">&nbsp;</TD>
+    <TD width="27%">&nbsp;</TD>
+    <TD width="25%" rowSpan=2><INPUT class=button type=submit value=" 查 询 " name=Submit></TD></TR>
+  <TR>
+    <TD align=right height=26>从&nbsp;日&nbsp;期：</TD>
+    <TD><LABEL><INPUT size=16 value=2010-4-1 name=date1><INPUT 
+      style="CURSOR: hand" onClick="setDay(date1);return false;" type=image 
+      height=16 width=18 src="../images/date.gif"></LABEL></TD>
+    <TD align=right>到&nbsp;日&nbsp;期：</TD>
+    <TD><INPUT size=16 value=2010-4-16 name=date2><INPUT style="CURSOR: hand" 
+      onclick="setDay(date2);return false;" type=image height=16 width=18 
+      src="../images/date.gif"></TD></TR></TBODY></TABLE></FORM>
+<DIV align=center><SPAN class=style1>利润分析</SPAN></DIV>
+<TABLE width=600 align=center>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR id=tr_tittle>
+          <TD background=../images/tittle_bg.gif colSpan=3>&nbsp;采购统计</TD></TR>
+        <TR>
+          <TD width=200>采购单数:4</TD>
+          <TD width=200>采购数量:42</TD>
+          <TD>采购金额:1851</TD></TR>
+        <TR>
+          <TD width=200>退货单数:0</TD>
+          <TD width=200>退货数量:0</TD>
+          <TD>退货金额:0</TD></TR>
+        <TR>
+          <TD width=200>合计:</TD>
+          <TD width=200>数量:42</TD>
+          <TD>金额:1851</TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR id=tr_tittle>
+          <TD background=../images/tittle_bg.gif colSpan=3>&nbsp;销售统计</TD></TR>
+        <TR>
+          <TD width=200>销售单数:2</TD>
+          <TD width=200>销售数量:23</TD>
+          <TD>销售金额:726</TD></TR>
+        <TR>
+          <TD width=200>退货单数:1</TD>
+          <TD width=200>退货数量:1</TD>
+          <TD>退货金额:0</TD></TR>
+        <TR>
+          <TD width=200>合计:</TD>
+          <TD width=200>数量:22</TD>
+          <TD>金额:726</TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR id=tr_tittle>
+          <TD background=../images/tittle_bg.gif colSpan=3>&nbsp;收付款</TD></TR>
+        <TR>
+          <TD width=200><STRONG>付款</STRONG></TD>
+          <TD width=200>应付金额:1851</TD>
+          <TD>实付金额:1185</TD></TR>
+        <TR>
+          <TD width=200><STRONG>收款</STRONG></TD>
+          <TD width=200>应收金额:726</TD>
+          <TD>实收金额:726</TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR id=tr_tittle>
+          <TD background=../images/tittle_bg.gif colSpan=3>&nbsp;利润分析</TD></TR>
+        <TR>
+          <TD width=200><STRONG>销售金额：726</STRONG></TD>
+          <TD width=200><STRONG>销售成本：7106</STRONG></TD>
+          <TD><STRONG>毛利润：-6380</STRONG></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>

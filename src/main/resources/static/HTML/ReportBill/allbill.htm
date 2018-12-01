@@ -1,0 +1,426 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML><HEAD><TITLE>采购汇总表</TITLE>
+<SCRIPT language=JavaScript src="../js/date.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/xmlhttp.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/order.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/showphoto.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/addrow.js"></SCRIPT>
+
+<SCRIPT>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   
+oTr.tag   =   true;
+}
+}
+
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+
+function addtext(i_row)
+{
+document.getElementById("temp").value=document.getElementById('tbl').rows[i_row].cells[0].innerHTML;
+}
+
+function GetDIV(oobj,val_i)
+{
+if (oobj == 'block')
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+else
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+ document.getElementById("search_suggest").style.display=oobj;
+ document.getElementById("temp1").value = document.getElementById('tbl').rows[val_i].cells[0].innerHTML;
+ document.getElementById("search_suggest").style.top=event.clientY+20+document.body.scrollTop;
+ document.getElementById("search_suggest").style.left=event.clientX+20+document.body.scrollLeft;
+}
+
+function CreateReturnValue(closeWindow,i){
+j=window.opener.document.all.sqd.rows.length;
+newRow=window.opener.document.all.sqd.insertRow(-1)
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML=j
+window.opener.document.getElementById("rowcount").value=j
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=delNumber type=radio >"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodscode"+j+" type=text class=INPUT1 id=goodscode"+j+" size=8 onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsname"+j+" type=text class=INPUT1 id=goodsname"+j+"  size=16  onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsunit"+j+" type=text class=INPUT1 id=goodsunit"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=units"+j+" type=text class=INPUT1 id=units"+j+"  size=3>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=price"+j+" type=text class=INPUT1 id=price"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=number"+j+" type=text class=INPUT1 id=number"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=money"+j+" type=text class=INPUT1 id=money"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=remark"+j+" type=text class=INPUT1 id=remark"+j+"  size=20><input name=aveprice"+j+" type=hidden class=INPUT1 id=aveprice"+j+"  size=20><input name=fact_num"+j+" type=hidden id=fact_number"+j+">"
+var goodscode=window.opener.document.getElementById("goodscode"+j);
+var goodsname=window.opener.document.getElementById("goodsname"+j);
+var goodsunit=window.opener.document.getElementById("goodsunit"+j);
+var units=window.opener.document.getElementById("units"+j);
+var remark=window.opener.document.getElementById("remark"+j);
+var number=window.opener.document.getElementById("number"+j);
+var price=window.opener.document.getElementById("price"+j);
+var aveprice=window.opener.document.getElementById("aveprice"+j);
+var fact_num=window.opener.document.getElementById("fact_num"+j);
+goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+goodsunit.value=document.getElementById('tbl').rows[i].cells[2].innerText;
+units.value=document.getElementById('tbl').rows[i].cells[3].innerText;
+remark.value=document.getElementById('tbl').rows[i].cells[6].innerText;
+aveprice.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+fact_num.value=document.getElementById('tbl').rows[i].cells[7].innerText;	 
+number.value=1;
+if (""=="XS")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+}
+else if (""=="XD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+} 
+else if (""=="CG")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="CD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="in")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 	 
+else
+{
+price.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+}
+//document.getElementById('tbl').deleteRow(i);
+document.getElementById('tbl').rows[i].style.display="none";
+}
+</SCRIPT>
+
+<SCRIPT>
+function check_edit(){
+if (document.getElementById("temp").value == "")
+{
+alert("请选择要编辑的单据！");
+return false;
+}else{
+window.open('#','main');
+}
+}
+function check_detail(){
+if (document.getElementById("temp").value == "")
+{
+alert("请选择要浏览的单据！");
+return false;
+}else{
+window.open('detail.htm','main');
+}
+}
+function check_del(){
+if (document.getElementById("temp").value == "")
+{
+alert("请选择要删除的单据！");
+return false;
+}else{
+ if(!confirm('确定要删除'+document.all.temp.value+'这张单据吗?')){
+  return false
+  }else{
+window.open('#','main');
+}
+}
+}
+</SCRIPT>
+
+<META http-equiv=Content-Type content="text/html; charset=GB2312"><LINK 
+href="../css/style.css" type=text/css rel=stylesheet>
+<SCRIPT language=JavaScript src="../js/xmlHttp(1).js"></SCRIPT>
+
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY>
+<TABLE align=center>
+  <TBODY>
+  <TR>
+    <TD>
+      <FORM id=form1 name=sample method=post>
+      <TABLE id=tbl_tittle width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD align=right width=70 height=24>仓库名称：</TD>
+          <TD width=150><SELECT name=depot><OPTION value="" 
+              selected></OPTION><OPTION value=库房>库房</OPTION></SELECT> </TD>
+          <TD align=right width=80>供应商/客户：</TD>
+          <TD width=150><LABEL><INPUT id=cust size=16 name=custname><A 
+            onclick="JavaScript:window.open ('../System/selectcust.htm', 'newwindow1', 'height=600, width=800,top=100,left=150, toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no, status=no')" 
+            href="#"><img 
+            height=17 src="../images/choose.gif" width=21 
+          border=0></A></LABEL></TD>
+          <TD rowSpan=2><INPUT class=button type=submit value=" 查 询 " name=Submit></TD></TR>
+        <TR>
+          <TD align=right height=26>从&nbsp;日&nbsp;期：</TD>
+          <TD><LABEL><INPUT size=16 value=2010-4-1 name=date1><INPUT 
+            style="CURSOR: hand" onClick="setDay(date1);return false;" 
+            type=image height=16 width=18 src="../images/date.gif"></LABEL></TD>
+          <TD align=right>到&nbsp;日&nbsp;期：</TD>
+          <TD><INPUT size=16 value=2010-4-16 name=date2><INPUT 
+            style="CURSOR: hand" onClick="setDay(date2);return false;" 
+            type=image height=16 width=18 src="../images/date.gif"></TD></TR>
+        <TR>
+          <TD align=right>货品名称：</TD>
+          <TD><INPUT id=goodsname size=16 name=goodsname></TD>
+          <TD align=right>经&nbsp;办&nbsp;人：</TD>
+          <TD><SELECT id=user name=user> <OPTION value="" 
+            selected></OPTION></SELECT></TD>
+          <TD rowSpan=2><LABEL><INPUT class=button onclick=check_edit(); type=button value=编辑单据></LABEL> 
+            <LABEL><INPUT class=button onclick=check_detail(); type=button value=浏览单据></LABEL> 
+            <LABEL><INPUT class=button onclick=check_del(); type=button value=删除单据></LABEL></TD></TR>
+        <TR>
+          <TD align=right>单据号码：</TD>
+          <TD><INPUT size=16 name=billcode></TD>
+          <TD align=right>单据类型：</TD>
+          <TD><SELECT name=billtype> <OPTION value="" selected></OPTION> 
+              <OPTION value=采购订货>采购订货</OPTION> <OPTION value=采购入库>采购入库</OPTION> 
+              <OPTION value=采购退货>采购退货</OPTION> <OPTION value=销售订货>销售订货</OPTION> 
+              <OPTION value=销售出库>销售出库</OPTION> <OPTION value=销售退货>销售退货</OPTION> 
+              <OPTION value=其他入库>其他入库</OPTION> <OPTION value=其他出库>其他出库</OPTION> 
+              <OPTION value=仓库调拨>仓库调拨</OPTION> <OPTION 
+            value=库存盘点>库存盘点</OPTION></SELECT></TD></TR></TBODY></TABLE></FORM>
+      <DIV align=center><SPAN class=style1>单据查询</SPAN></DIV><INPUT id=temp1 
+      onpropertychange=change_key() type=hidden name=temp1><INPUT id=temp 
+      type=hidden name=temp></FORM>
+      <FORM name=excel   method=post target=_blank><INPUT 
+      type=hidden value=allbill name=table><INPUT type=hidden 
+      value="select distinct t_bill.billcode as billcode,t_bill.custname as custname,adddate,depotname,billtype,username,memo from s_billdetail where diaobo=false and (AddDate)<=#2010-4-16# and (AddDate)>=#2010-4-1# and depotname in ('酒泉库','武威库','张掖库','成品仓','库房',) order by adddate desc" 
+      name=sql>
+      <TABLE id=tbl onclick=sortColumn(event) width=830 align=center border=0>
+        <THEAD>
+        <TR align=middle>
+          <TH style="CURSOR: pointer" width=140 
+          type="CaseInsensitiveString">单号</TH>
+          <TH style="CURSOR: pointer" width=80 
+          type="CaseInsensitiveString">日期</TH>
+          <TH style="CURSOR: pointer" width=270 
+            type="CaseInsensitiveString">单位或部门名称</TH>
+          <TH style="CURSOR: pointer" width=80 
+            type="CaseInsensitiveString">业务类型</TH>
+          <TH style="CURSOR: pointer" width=60 
+          type="CaseInsensitiveString">经办人</TH>
+          <TH style="CURSOR: pointer" width=80 
+          type="CaseInsensitiveString">仓库名</TH>
+          <TH style="CURSOR: pointer" width=120 
+          type="CaseInsensitiveString">备注</TH></TR></THEAD>
+        <TBODY>
+        <TR onMouseMove="GetDIV('block',1)" id=tr onMouseOut="GetDIV('none',1)" 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(1)>XS-2010-04-16-0001</TD>
+          <TD id=tb onclick=addtext(1)>2010-4-16</TD>
+          <TD id=tb onclick=addtext(1)>asdf</TD>
+          <TD id=tb onclick=addtext(1)>销售出库</TD>
+          <TD id=tb onclick=addtext(1)></TD>
+          <TD id=tb onclick=addtext(1)>库房</TD>
+          <TD id=tb onclick=addtext(1)></TD></TR>
+        <TR onMouseMove="GetDIV('block',2)" id=tr onMouseOut="GetDIV('none',2)" 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(2)>XS-2010-04-16-0002</TD>
+          <TD id=tb onclick=addtext(2)>2010-4-16</TD>
+          <TD id=tb onclick=addtext(2)>asdf</TD>
+          <TD id=tb onclick=addtext(2)>销售出库</TD>
+          <TD id=tb onclick=addtext(2)></TD>
+          <TD id=tb onclick=addtext(2)>库房</TD>
+          <TD id=tb onclick=addtext(2)></TD></TR>
+        <TR onMouseMove="GetDIV('block',3)" id=tr onMouseOut="GetDIV('none',3)" 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(3)>CD-2010-04-15-0001</TD>
+          <TD id=tb onclick=addtext(3)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(3)>asdf</TD>
+          <TD id=tb onclick=addtext(3)>采购订货</TD>
+          <TD id=tb onclick=addtext(3)></TD>
+          <TD id=tb onclick=addtext(3)>库房</TD>
+          <TD id=tb onclick=addtext(3)></TD></TR>
+        <TR onMouseMove="GetDIV('block',4)" id=tr onMouseOut="GetDIV('none',4)" 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(4)>CD-2010-04-15-0002</TD>
+          <TD id=tb onclick=addtext(4)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(4)>asdf</TD>
+          <TD id=tb onclick=addtext(4)>采购订货</TD>
+          <TD id=tb onclick=addtext(4)></TD>
+          <TD id=tb onclick=addtext(4)>库房</TD>
+          <TD id=tb onclick=addtext(4)></TD></TR>
+        <TR onMouseMove="GetDIV('block',5)" id=tr onMouseOut="GetDIV('none',5)" 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(5)>CD-2010-04-15-0003</TD>
+          <TD id=tb onclick=addtext(5)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(5)>asdf</TD>
+          <TD id=tb onclick=addtext(5)>采购订货</TD>
+          <TD id=tb onclick=addtext(5)></TD>
+          <TD id=tb onclick=addtext(5)>库房</TD>
+          <TD id=tb onclick=addtext(5)></TD></TR>
+        <TR onMouseMove="GetDIV('block',6)" id=tr onMouseOut="GetDIV('none',6)" 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(6)>CG-2010-04-15-0001</TD>
+          <TD id=tb onclick=addtext(6)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(6)>asdf</TD>
+          <TD id=tb onclick=addtext(6)>采购入库</TD>
+          <TD id=tb onclick=addtext(6)></TD>
+          <TD id=tb onclick=addtext(6)>库房</TD>
+          <TD id=tb onclick=addtext(6)></TD></TR>
+        <TR onMouseMove="GetDIV('block',7)" id=tr onMouseOut="GetDIV('none',7)" 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(7)>CG-2010-04-15-0002</TD>
+          <TD id=tb onclick=addtext(7)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(7)>asdf</TD>
+          <TD id=tb onclick=addtext(7)>采购入库</TD>
+          <TD id=tb onclick=addtext(7)></TD>
+          <TD id=tb onclick=addtext(7)>库房</TD>
+          <TD id=tb onclick=addtext(7)></TD></TR>
+        <TR onMouseMove="GetDIV('block',8)" id=tr onMouseOut="GetDIV('none',8)" 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(8)>CG-2010-04-15-0003</TD>
+          <TD id=tb onclick=addtext(8)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(8)>asdf</TD>
+          <TD id=tb onclick=addtext(8)>采购入库</TD>
+          <TD id=tb onclick=addtext(8)></TD>
+          <TD id=tb onclick=addtext(8)>库房</TD>
+          <TD id=tb onclick=addtext(8)></TD></TR>
+        <TR onMouseMove="GetDIV('block',9)" id=tr onMouseOut="GetDIV('none',9)" 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(9)>CG-2010-04-15-0004</TD>
+          <TD id=tb onclick=addtext(9)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(9)>asdf</TD>
+          <TD id=tb onclick=addtext(9)>采购入库</TD>
+          <TD id=tb onclick=addtext(9)></TD>
+          <TD id=tb onclick=addtext(9)>库房</TD>
+          <TD id=tb onclick=addtext(9)></TD></TR>
+        <TR onMouseMove="GetDIV('block',10)" id=tr 
+        onmouseout="GetDIV('none',10)" align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(10)>CK-2010-04-15-0001</TD>
+          <TD id=tb onclick=addtext(10)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(10)>asdf</TD>
+          <TD id=tb onclick=addtext(10)>其他出库</TD>
+          <TD id=tb onclick=addtext(10)></TD>
+          <TD id=tb onclick=addtext(10)>库房</TD>
+          <TD id=tb onclick=addtext(10)></TD></TR>
+        <TR onMouseMove="GetDIV('block',11)" id=tr 
+        onmouseout="GetDIV('none',11)" align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(11)>DB-2010-04-15-0001</TD>
+          <TD id=tb onclick=addtext(11)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(11)>库房</TD>
+          <TD id=tb onclick=addtext(11)>仓库调拨</TD>
+          <TD id=tb onclick=addtext(11)></TD>
+          <TD id=tb onclick=addtext(11)>库房</TD>
+          <TD id=tb onclick=addtext(11)></TD></TR>
+        <TR onMouseMove="GetDIV('block',12)" id=tr 
+        onmouseout="GetDIV('none',12)" align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(12)>RK-2010-04-15-0001</TD>
+          <TD id=tb onclick=addtext(12)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(12)>asdf</TD>
+          <TD id=tb onclick=addtext(12)>其他入库</TD>
+          <TD id=tb onclick=addtext(12)></TD>
+          <TD id=tb onclick=addtext(12)>库房</TD>
+          <TD id=tb onclick=addtext(12)></TD></TR>
+        <TR onMouseMove="GetDIV('block',13)" id=tr 
+        onmouseout="GetDIV('none',13)" align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(13)>XD-2010-04-15-0001</TD>
+          <TD id=tb onclick=addtext(13)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(13)>asdf</TD>
+          <TD id=tb onclick=addtext(13)>销售订货</TD>
+          <TD id=tb onclick=addtext(13)></TD>
+          <TD id=tb onclick=addtext(13)>库房</TD>
+          <TD id=tb onclick=addtext(13)></TD></TR>
+        <TR onMouseMove="GetDIV('block',14)" id=tr 
+        onmouseout="GetDIV('none',14)" align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(14)>XS-2010-04-15-0001</TD>
+          <TD id=tb onclick=addtext(14)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(14)>asdf</TD>
+          <TD id=tb onclick=addtext(14)>销售出库</TD>
+          <TD id=tb onclick=addtext(14)></TD>
+          <TD id=tb onclick=addtext(14)>库房</TD>
+          <TD id=tb onclick=addtext(14)></TD></TR>
+        <TR onMouseMove="GetDIV('block',15)" id=tr 
+        onmouseout="GetDIV('none',15)" align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(15)>XT-2010-04-15-0001</TD>
+          <TD id=tb onclick=addtext(15)>2010-4-15</TD>
+          <TD id=tb onclick=addtext(15)>asdf</TD>
+          <TD id=tb onclick=addtext(15)>销售退货</TD>
+          <TD id=tb onclick=addtext(15)></TD>
+          <TD id=tb onclick=addtext(15)>库房</TD>
+          <TD id=tb onclick=addtext(15)></TD></TR></TBODY></TABLE>
+      <TABLE width=830 align=center border=0>
+        <TBODY>
+        <TR>
+          <TH align=left colSpan=7><FONT style="FONT-FAMILY: Webdings">9 
+            3</FONT> [1] <FONT style="FONT-FAMILY: Webdings">4 :</FONT> 
+            [页次:1/1页] [共15条] [20条/页]
+            <SCRIPT>
+function tiaozhuan(){
+var yema=document.getElementById("yema").value
+document.form1.action='/lenobs/bsjxc/Report/allbill.asp?page='+yema;
+document.form1.submit();
+}
+</SCRIPT>
+             转到第：<INPUT id=yema size=1>页<LABEL class=button1><INPUT onclick=tiaozhuan() type=button value=GO></LABEL> 
+            <LABEL 
+        class=button1><INPUT type=submit value=Excel></LABEL></TH></TR></TBODY></TABLE></FORM>
+      <DIV class=billdetail id=search_suggest 
+      style="DISPLAY: none; POSITION: absolute"></DIV></TD></TR></TBODY></TABLE></BODY></HTML>

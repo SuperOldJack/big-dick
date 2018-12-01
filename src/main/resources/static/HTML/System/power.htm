@@ -1,0 +1,315 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0073)http://download.lenosoft.net/lenobs/bsjxc/common/power.asp?username=admin -->
+<HTML><HEAD><TITLE>权限设置</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="../css/style.css" type=text/css rel=stylesheet>
+<STYLE type=text/css>.STYLE2 {
+	COLOR: #000000
+}
+</STYLE>
+
+<SCRIPT language=javascript>
+function checkAll(e, itemName){
+var aa = document.getElementsByName(itemName);
+for (var j=0; j<aa.length; j++)
+aa[j].checked = e.checked;
+}
+function checkItem(e, allName){
+var all = document.getElementsByName(allName)[0];
+if(!e.checked) all.checked = false;
+else{
+var aa = document.getElementsByName(e.name);
+for (var j=0; j<aa.length; j++)
+if(!aa[j].checked) return;
+all.checked = true;
+}
+}
+</SCRIPT>
+
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY><BR>
+<DIV align=center>
+  <table width=800 align=center border=0>
+    <tbody>
+      <tr>
+        <td background="../images/tittle_bg.gif" colspan=8><span 
+      class=STYLE2>&nbsp;采购权限</span>
+          <input id=_01t 
+      onClick="checkAll(this, '01')" type=checkbox value=checkbox 
+      name=checkbox_01></td>
+      </tr>
+      <tr>
+        <td align=right width="17%">新增采购单</td>
+        <td width="4%"><input type=checkbox checked value=0101 name=01></td>
+        <td align=right width="17%">修改采购单</td>
+        <td width="4%"><input type=checkbox checked value=0102 name=01></td>
+        <td align=right width="19%">删除采购单</td>
+        <td width="4%"><input type=checkbox checked value=0103 name=01></td>
+        <td align=right width="19%">浏览采购单</td>
+        <td width="16%"><input type=checkbox checked value=0104 name=01></td>
+      </tr>
+      <tr>
+        <td align=right>新增退货单</td>
+        <td><input type=checkbox checked value=0105 name=01></td>
+        <td align=right>修改退货单</td>
+        <td><input type=checkbox checked value=0106 name=01></td>
+        <td align=right>删除退货单</td>
+        <td><input type=checkbox checked value=0107 name=01></td>
+        <td align=right>浏览退货单</td>
+        <td><input type=checkbox checked value=0108 name=01></td>
+      </tr>
+      <tr>
+        <td align=right>物品采购汇总表</td>
+        <td><input type=checkbox checked value=0109 name=01></td>
+        <td align=right>物品采购明细表</td>
+        <td><input type=checkbox checked value=0110 name=01></td>
+        <td align=right>供应商采购汇总表</td>
+        <td><input type=checkbox checked value=0111 name=01></td>
+        <td align=right>采购订单完成情况</td>
+        <td><input type=checkbox checked value=0112 name=01></td>
+      </tr>
+      <tr>
+        <td align=right>新增采购订单</td>
+        <td><input type=checkbox checked value=0113 name=01></td>
+        <td align=right>编辑采购订单</td>
+        <td><input type=checkbox checked value=0114 name=01></td>
+        <td align=right>删除采购订单</td>
+        <td><input type=checkbox checked value=0115 name=01></td>
+        <td align=right>浏览采购订单</td>
+        <td><input type=checkbox checked value=0116 name=01></td>
+      </tr>
+      <tr>
+        <td align=right>审核采购订单</td>
+        <td><input type=checkbox checked value=0117 name=01></td>
+        <td align=right>反审采购订单</td>
+        <td><input type=checkbox checked value=0118 name=01></td>
+        <td align=right></td>
+        <td></td>
+        <td align=right></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td background=../images/tittle_bg.gif colspan=8><span 
+      class=STYLE2>&nbsp;销售权限</span>
+          <input id=_02 
+      onClick="checkAll(this,'02');" type=checkbox value=checkbox 
+      name=checkbox_02></td>
+      </tr>
+      <tr>
+        <td align=right width="17%">新增销售单</td>
+        <td width="4%"><input type=checkbox checked value=0201 name=02></td>
+        <td align=right width="17%">修改销售单</td>
+        <td width="4%"><input type=checkbox checked value=0202 name=02></td>
+        <td align=right width="19%">删除销售单</td>
+        <td width="4%"><input type=checkbox checked value=0203 name=02></td>
+        <td align=right width="19%">浏览销售单</td>
+        <td><input type=checkbox checked value=0204 name=02></td>
+      </tr>
+      <tr>
+        <td align=right>新增退货单</td>
+        <td><input type=checkbox checked value=0205 name=02></td>
+        <td align=right>修改退货单</td>
+        <td><input type=checkbox checked value=0206 name=02></td>
+        <td align=right>删除退货单</td>
+        <td><input type=checkbox checked value=0207 name=02></td>
+        <td align=right>浏览退货单</td>
+        <td><input type=checkbox checked value=0208 name=02></td>
+      </tr>
+      <tr>
+        <td align=right>物品销售汇总表</td>
+        <td><input type=checkbox checked value=0209 name=02></td>
+        <td align=right>物品销售明细表</td>
+        <td><input type=checkbox checked value=0210 name=02></td>
+        <td align=right>客户销售汇总表</td>
+        <td><input type=checkbox checked value=0211 name=02></td>
+        <td align=right>销售订单完成情况</td>
+        <td><input type=checkbox checked value=0212 name=02></td>
+      </tr>
+      <tr>
+        <td align=right>新增销售订单</td>
+        <td><input type=checkbox checked value=0213 name=02></td>
+        <td align=right>编辑销售订单</td>
+        <td><input type=checkbox checked value=0214 name=02></td>
+        <td align=right>删除销售订单</td>
+        <td><input type=checkbox checked value=0215 name=02></td>
+        <td align=right>浏览销售订单</td>
+        <td><input type=checkbox checked value=0216 name=02></td>
+      </tr>
+      <tr>
+        <td align=right>审核销售订单</td>
+        <td><input type=checkbox checked value=0217 name=02></td>
+        <td align=right>反审销售订单</td>
+        <td><input type=checkbox checked value=0218 name=02></td>
+        <td align=right></td>
+        <td></td>
+        <td align=right></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td background=../images/tittle_bg.gif colspan=8><span 
+      class=STYLE2>&nbsp;库存管理</span>
+          <input id=_03 
+      onClick="checkAll(this,'03');" type=checkbox value=checkbox 
+      name=checkbox_03></td>
+      </tr>
+      <tr>
+        <td align=right>新增入库单</td>
+        <td><input type=checkbox checked value=0301 name=03></td>
+        <td align=right>修改入库单</td>
+        <td><input type=checkbox checked value=0302 name=03></td>
+        <td align=right>删除入库单</td>
+        <td><input type=checkbox checked value=0303 name=03></td>
+        <td align=right>浏览入库单</td>
+        <td><input type=checkbox checked value=0304 name=03></td>
+      </tr>
+      <tr>
+        <td align=right>新增出库单</td>
+        <td><input type=checkbox checked value=0305 name=03></td>
+        <td align=right>修改出库单</td>
+        <td><input type=checkbox checked value=0306 name=03></td>
+        <td align=right>删除出库单</td>
+        <td><input type=checkbox checked value=0307 name=03></td>
+        <td align=right>浏览出库单</td>
+        <td><input type=checkbox checked value=0308 name=03></td>
+      </tr>
+      <tr>
+        <td align=right>新增调拨单</td>
+        <td><input type=checkbox checked value=0309 name=03></td>
+        <td align=right>修改调拨单</td>
+        <td><input type=checkbox checked value=0310 name=03></td>
+        <td align=right>删除调拨单</td>
+        <td><input type=checkbox checked value=0311 name=03></td>
+        <td align=right>浏览调拨单</td>
+        <td><input type=checkbox checked value=0312 name=03></td>
+      </tr>
+      <tr>
+        <td align=right>新增盘点单</td>
+        <td><input type=checkbox checked value=0313 name=03></td>
+        <td align=right>修改盘点单</td>
+        <td><input type=checkbox checked value=0314 name=03></td>
+        <td align=right>删除盘点单</td>
+        <td><input type=checkbox checked value=0315 name=03></td>
+        <td align=right>浏览盘点单</td>
+        <td><input type=checkbox checked value=0316 name=03></td>
+      </tr>
+      <tr>
+        <td background=../images/tittle_bg.gif colspan=8><span 
+      class=STYLE2>&nbsp;财务管理</span>
+          <input id=_04 
+      onClick="checkAll(this,'04');" type=checkbox value=checkbox 
+      name=checkbox_04></td>
+      </tr>
+      <tr>
+        <td align=right>新增付款单</td>
+        <td><input type=checkbox checked value=0401 name=04></td>
+        <td align=right>修改付款单</td>
+        <td><input type=checkbox checked value=0402 name=04></td>
+        <td align=right>删除付款单</td>
+        <td><input type=checkbox checked value=0403 name=04></td>
+        <td align=right>浏览付款单</td>
+        <td><input type=checkbox checked value=0404 name=04></td>
+      </tr>
+      <tr>
+        <td align=right>新增收款单</td>
+        <td><input type=checkbox checked value=0405 name=04></td>
+        <td align=right>修改收款单</td>
+        <td><input type=checkbox checked value=0406 name=04></td>
+        <td align=right>删除收款单</td>
+        <td><input type=checkbox checked value=0407 name=04></td>
+        <td align=right>浏览收款单</td>
+        <td><input type=checkbox checked value=0408 name=04></td>
+      </tr>
+      <tr>
+        <td align=right>应付账款表-单据</td>
+        <td><input type=checkbox checked value=0409 name=04></td>
+        <td align=right>应付账款表-往来单位</td>
+        <td><input type=checkbox checked value=0410 name=04></td>
+        <td align=right>应收账款表-单据</td>
+        <td><input type=checkbox checked value=0411 name=04></td>
+        <td align=right>应收账款表-往来单位</td>
+        <td><input type=checkbox checked value=0412 name=04></td>
+      </tr>
+      <tr>
+        <td background=../images/tittle_bg.gif colspan=8><span 
+      class=STYLE2>&nbsp;库存和单据查询</span>
+          <input id=_05 
+      onClick="checkAll(this,'05');" type=checkbox value=checkbox 
+      name=checkbox_05></td>
+      </tr>
+      <tr>
+        <td align=right>单据查询</td>
+        <td><input type=checkbox checked value=0501 name=05></td>
+        <td align=right>库存数量查询</td>
+        <td><input type=checkbox checked value=0502 name=05></td>
+        <td align=right>库存报警</td>
+        <td><input type=checkbox checked value=0503 name=05></td>
+        <td align=right>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td align=right>库存汇总</td>
+        <td><input type=checkbox checked value=0504 name=05></td>
+        <td align=right>库存明细</td>
+        <td><input type=checkbox checked value=0505 name=05></td>
+        <td align=right>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td align=right>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td background=../images/tittle_bg.gif colspan=8><span 
+      class=STYLE2>&nbsp;其他报表</span>
+          <input id=_06 
+      onClick="checkAll(this,'06');" type=checkbox value=checkbox 
+      name=checkbox_06></td>
+      </tr>
+      <tr>
+        <td align=right>利润分析</td>
+        <td><input type=checkbox checked value=0601 name=06></td>
+        <td align=right>销售排行</td>
+        <td><input type=checkbox checked value=0602 name=06></td>
+        <td align=right>进销存报表</td>
+        <td><input type=checkbox checked value=0603 name=06></td>
+        <td align=right>其他明细报表</td>
+        <td><input type=checkbox checked value=0604 name=06></td>
+      </tr>
+      <tr>
+        <td background=../images/tittle_bg.gif colspan=8><span 
+      class=STYLE2>&nbsp;基础资料</span>
+          <input id=_07 
+      onClick="checkAll(this,'07');" type=checkbox value=checkbox 
+      name=checkbox_07></td>
+      </tr>
+      <tr>
+        <td align=right>往来单位资料</td>
+        <td><input type=checkbox checked value=0701 name=07></td>
+        <td align=right>货品资料</td>
+        <td><input type=checkbox checked value=0702 name=07></td>
+        <td align=right>职员信息</td>
+        <td><input type=checkbox checked value=0703 name=07></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td background=../images/tittle_bg.gif colspan=8><span 
+      class=STYLE2>&nbsp;系统设置</span>
+          <input id=_08 
+      onClick="checkAll(this,'08');" type=checkbox value=checkbox 
+      name=checkbox_08></td>
+      </tr>
+      <tr>
+        <td align=right>操作员管理</td>
+        <td><input type=checkbox checked value=0801 name=08></td>
+        <td align=right>系统设置</td>
+        <td><input type=checkbox checked value=0802 name=08></td>
+        <td align=right>系统初始化</td>
+        <td><input type=checkbox checked value=0803 name=08></td>
+        <td align=right>软件认证</td>
+        <td><input type=checkbox checked value=0804 name=08></td>
+      </tr>
+    </tbody>
+  </table>
+<SPAN class=style1>权限设置</SPAN></DIV>
+<FORM name=power  method=post>
+<DIV 
+align=center><INPUT class=button type=button value=" 保 存 "></DIV></FORM></BODY></HTML>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML><HEAD><TITLE>增加/修改货品资料</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="../css/style.css" type=text/css rel=stylesheet>
+<SCRIPT src="../js/AnPlus.js" type=text/javascript></SCRIPT>
+
+<SCRIPT src="../js/AjaxUploader.js" type=text/javascript></SCRIPT>
+
+<SCRIPT src="../js/jQuery.js" type=text/javascript></SCRIPT>
+
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY>
+<DIV id=uploadContenter 
+style="BORDER-RIGHT: #555555 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #555555 1px solid; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; BORDER-LEFT: #555555 1px solid; PADDING-TOP: 3px; BORDER-BOTTOM: #555555 1px solid; POSITION: absolute; BACKGROUND-COLOR: #eeeeee"></DIV><IFRAME 
+style="DISPLAY: none" name=AnUploader src="about:blank"></IFRAME>
+<SCRIPT src="../js/upload.js" type=text/javascript></SCRIPT>
+
+<SCRIPT>
+function check_code(){
+    $.post("#",{goodscode:escape($("#goodscode").val())},
+	function(data)
+	{ 
+       if (data == "True"){
+		   $("#div_check_code").attr("innerHTML","<font color=#00FF00>可以使用该编码</font>"); 
+		   }else{
+		   $("#div_check_code").attr("innerHTML","<font color=#FF0000>货品编码重复</font>"); 
+	   }
+	}
+	);	
+}
+function check_name(){
+    $.post("#",{goodsname:escape($("#goodsname").val())},
+	function(data)
+	{ 
+       if (data == "True"){
+		   $("#div_check_name").attr("innerHTML","<font color=#00FF00>可以使用该名称</font>"); 
+		   }else{
+		   $("#div_check_name").attr("innerHTML","<font color=#FF0000>货品名称重复</font>"); 
+	   }
+	}
+	);	
+}
+function showphoto() {
+if (document.getElementById("img").value == "" ){
+alert("无相关图片！");
+return false;
+}
+else{
+window.open ('#', 'showphoto', 'height=600, width=800,,top=100,left=150,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no');
+}
+}
+
+function CreateReturnValue(){
+var nodecode=document.getElementById("goodstype");
+nodecode.value=document.getElementById('nodename').value; 
+}
+
+function check(){
+if (document.getElementById("goodscode").value=="")
+{
+alert("请输入货品编码！");
+document.getElementById("goodscode").focus();
+return false; 
+}
+if (document.getElementById("goodsname").value=="")
+{
+alert("请输入货品名称！");
+document.getElementById("goodsname").focus();
+return false; 
+}
+
+}
+function setHiddenRow(oTable,k)
+{
+   oTable.style.display = oTable.style.display == "none"?"block":"none";
+}
+</SCRIPT>
+
+<FORM name=form1 onSubmit="return check();" 
+method=post><BR>
+<DIV align=center><SPAN class=STYLE1>货品资料</SPAN></DIV><BR>
+<TABLE width=600 align=center>
+  <TBODY>
+  <TR><INPUT onpropertychange=CreateReturnValue() type=hidden name=nodename> 
+    <TD align=middle width="10%">货品编码：</TD>
+    <TD width="23%"><INPUT id=goodscode onblur=check_code(); name=goodscode> 
+      <FONT color=red>*</FONT> 
+      <DIV id=div_check_code></DIV></TD>
+    <TD align=middle width="10%">货品名称：</TD>
+    <TD width="24%"><INPUT id=goodsname onblur=check_name(); name=goodsname> 
+      <FONT color=red>*</FONT> 
+      <DIV id=div_check_name></DIV></TD></TR>
+  <TR>
+    <TD align=middle width="10%">货品类别：</TD><INPUT id=typecode type=hidden 
+    name=typecode> 
+    <TD width="23%"><INPUT id=goodstype name=goodstype><A 
+      onclick="window.open ('../System/edittree2.htm', 'newwindow', 'height=400, width=200,toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no, status=yes')" 
+      href="#"><IMG 
+      height=17 src="../images/choose.gif" width=21 border=0></A></TD>
+    <TD align=middle width="10%">货品规格：</TD>
+    <TD width="23%"><INPUT id=goodsunit name=goodsunit></TD></TR>
+  <TR>
+    <TD align=middle width="10%">单&nbsp;&nbsp;&nbsp;&nbsp;位：</TD>
+    <TD><SELECT name=units> <OPTION value=个 selected>个</OPTION> <OPTION 
+        value=条>条</OPTION> <OPTION value=件>件</OPTION> <OPTION value=台>台</OPTION> 
+        <OPTION value=包>包</OPTION> <OPTION value=盒>盒</OPTION> <OPTION 
+        value=套>套</OPTION> <OPTION value=米>米</OPTION> <OPTION value=只>只</OPTION> 
+        <OPTION value=公斤>公斤</OPTION> <OPTION value=升>升</OPTION></SELECT></TD>
+    <TD align=middle width="10%">条&nbsp;形&nbsp;码：</TD>
+    <TD><INPUT id=barcode name=barcode></TD></TR>
+  <TR>
+    <TD align=middle width="10%">入&nbsp;库&nbsp;价：</TD>
+    <TD width="23%"><INPUT id=InPrice value=0 name=InPrice></TD>
+    <TD align=middle width="10%">出&nbsp;库&nbsp;价：</TD>
+    <TD><INPUT id=OutPrice value=0 name=OutPrice></TD></TR>
+  <TR>
+    <TD align=middle width="10%">库存上限：</TD>
+    <TD><INPUT id=DepotUp value=0 name=DepotUp></TD>
+    <TD align=middle width="10%">库存下限：</TD>
+    <TD><INPUT id=DepotDown value=0 name=DepotDown></TD></TR>
+  <TR>
+    <TD align=middle width="10%">备&nbsp;&nbsp;&nbsp;&nbsp;注：</TD>
+    <TD colSpan=3><INPUT id=remark size=60 name=remark></TD></TR>
+  <TR>
+    <TD align=middle width="10%">货品图片：</TD>
+    <TD colSpan=3><INPUT id=img size=30 name=img> <INPUT class=button onClick="showUploader('img',this);" type=button value=上传图片> 
+<INPUT class=button onclick=showphoto(); type=button value=查看图片> </TD></TR>
+  <TR>
+    <TD align=middle colSpan=4><INPUT class=button onClick="setHiddenRow(document.getElementById('tbl'),1)" type=button value=期初录入> 
+
+      <TABLE id=tbl style="DISPLAY: none" align=center>
+        <TBODY>
+        <TR>
+          <TH>仓库名称</TH>
+          <TH>期初数量</TH>
+          <TH>期初平均价</TH></TR>
+        <TR>
+          <TD><INPUT value=库房 name=depot1 zise="10"></TD>
+          <TD><INPUT value=0 name=startnumber1 zise="10"></TD>
+          <TD><INPUT value=0 name=startprice1 
+  zise="10"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><BR>
+<DIV align=center><INPUT class=button onClick="return check();" type=submit value=" 保 存 " name=submit> 
+<INPUT class=button type=reset value=" 重 置 " name=submit></DIV></FORM></BODY></HTML>

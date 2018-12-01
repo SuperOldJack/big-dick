@@ -1,0 +1,89 @@
+<html><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=GB2312">
+<link rel="stylesheet" href="../css/style.css" type="text/css">
+<title>选择往来单位</title>
+<script language="javascript">
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   oTr.tag   =   true;
+}
+}
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+</script>
+</head><body topmargin="0">　　 <script>
+　　 function CreateReturnValue(closeWindow,i)
+　　 {
+　　 var custname=window.opener.document.getElementById("cust");
+     custname.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+　　 if (closeWindow)
+　　 {
+　　 window.opener=null;
+　　 window.close();
+　　 }
+　　 }
+　　 </script>
+
+<table><form name="form1" method="post" ></form>
+<tbody><tr>
+  <td align="right">往来单位名称</td>
+  <td><input name="s_custname" size="16" type="text"></td>
+  <td align="right">往来单位分类</td>
+  <td><LABEL><input name="nodename" size="16" type="text"><input 
+name="typecode" value="" type="hidden"><a onClick="window.open('tree.htm', 'newwindow2', 'height=400, width=200, toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no, status=no')"  href="#"><img src="../images/choose.gif" border="0" 
+height="17" width="21"></a></LABEL></td>
+  <td><input name="select" value=" 查 询 " class="button" type="submit"></td>
+</tr>
+</tbody></table>
+<hr>
+<table id="tbl" width="100%">
+<tbody><tr align="center" height="20px">
+  <th width="20%">名称</th>
+  <th width="15%">类别</th>
+  <th width="15%">联系人</th>
+  <th width="15%">电话</th>
+  <th width="35%">地址</th>
+</tr>
+	<tr onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,1);" align="center"><td>asdf</td><td></td><td></td><td></td><td></td></tr>
+	</tbody></table>
+<table align="center" border="0" width="100%"><tbody><tr><th colspan="5"
+ align="left"> <font style="font-family: Webdings;">9 3</font> [1] <font
+ style="font-family: Webdings;">4 :</font> [页次:1/1页] [共1条] [15条/页]
+<script>
+function tiaozhuan(){
+var yema=document.getElementById("yema").value
+document.form1.action='/lenobs/bsjxc/common/selectcust.asp?page='+yema;
+document.form1.submit();
+}
+</script>
+ 转到第：<input id="yema" size="1" type="text">页<label class="button1"><input
+ value="GO" onClick="tiaozhuan()" type="button"></label> </th></tr></tbody></table>
+</body></html>

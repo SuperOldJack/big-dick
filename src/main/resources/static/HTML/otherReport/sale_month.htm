@@ -1,0 +1,385 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML><HEAD><TITLE>月销售统计</TITLE>
+<SCRIPT language=JavaScript src="../js/date.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/xmlhttp.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/order.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/showphoto.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/addrow.js"></SCRIPT>
+
+<SCRIPT>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   
+oTr.tag   =   true;
+}
+}
+
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+
+function addtext(i_row)
+{
+document.getElementById("temp").value=document.getElementById('tbl').rows[i_row].cells[0].innerHTML;
+}
+
+function GetDIV(oobj,val_i)
+{
+if (oobj == 'block')
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+else
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+ document.getElementById("search_suggest").style.display=oobj;
+ document.getElementById("temp1").value = document.getElementById('tbl').rows[val_i].cells[0].innerHTML;
+ document.getElementById("search_suggest").style.top=event.clientY+20+document.body.scrollTop;
+ document.getElementById("search_suggest").style.left=event.clientX+20+document.body.scrollLeft;
+}
+
+function CreateReturnValue(closeWindow,i){
+j=window.opener.document.all.sqd.rows.length;
+newRow=window.opener.document.all.sqd.insertRow(-1)
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML=j
+window.opener.document.getElementById("rowcount").value=j
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=delNumber type=radio >"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodscode"+j+" type=text class=INPUT1 id=goodscode"+j+" size=8 onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsname"+j+" type=text class=INPUT1 id=goodsname"+j+"  size=16  onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsunit"+j+" type=text class=INPUT1 id=goodsunit"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=units"+j+" type=text class=INPUT1 id=units"+j+"  size=3>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=price"+j+" type=text class=INPUT1 id=price"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=number"+j+" type=text class=INPUT1 id=number"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=money"+j+" type=text class=INPUT1 id=money"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=remark"+j+" type=text class=INPUT1 id=remark"+j+"  size=20><input name=aveprice"+j+" type=hidden class=INPUT1 id=aveprice"+j+"  size=20><input name=fact_num"+j+" type=hidden id=fact_number"+j+">"
+var goodscode=window.opener.document.getElementById("goodscode"+j);
+var goodsname=window.opener.document.getElementById("goodsname"+j);
+var goodsunit=window.opener.document.getElementById("goodsunit"+j);
+var units=window.opener.document.getElementById("units"+j);
+var remark=window.opener.document.getElementById("remark"+j);
+var number=window.opener.document.getElementById("number"+j);
+var price=window.opener.document.getElementById("price"+j);
+var aveprice=window.opener.document.getElementById("aveprice"+j);
+var fact_num=window.opener.document.getElementById("fact_num"+j);
+goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+goodsunit.value=document.getElementById('tbl').rows[i].cells[2].innerText;
+units.value=document.getElementById('tbl').rows[i].cells[3].innerText;
+remark.value=document.getElementById('tbl').rows[i].cells[6].innerText;
+aveprice.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+fact_num.value=document.getElementById('tbl').rows[i].cells[7].innerText;	 
+number.value=1;
+if (""=="XS")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+}
+else if (""=="XD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+} 
+else if (""=="CG")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="CD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="in")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 	 
+else
+{
+price.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+}
+//document.getElementById('tbl').deleteRow(i);
+document.getElementById('tbl').rows[i].style.display="none";
+}
+</SCRIPT>
+
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="../css/style.css" type=text/css rel=stylesheet>
+<SCRIPT language=JavaScript src="../js/jquery.js"></SCRIPT>
+
+<SCRIPT language=javascript type=text/javascript>
+$(document).ready(function() {
+	$("#nodename").change(function() {
+		if ($("#nodename").val()==""){
+		$("#typecode").attr("value","");
+		}
+	});
+});
+</SCRIPT>
+
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY>
+<FORM name=form1  method=post>
+<TABLE align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>年&nbsp;&nbsp;&nbsp;&nbsp;份:</TD>
+    <TD><INPUT size=16 value=2010 name=year></TD>
+    <TD>货品分类:</TD>
+    <TD><INPUT id=nodename size=16 name=nodename><A 
+      onclick="window.open ('../System/edittree2.htm', 'newwindow', 'height=400, width=200,toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no, status=no')" 
+      href="#"><IMG 
+      height=17 src="../images/choose.gif" width=21 border=0></A><INPUT 
+      id=typecode type=hidden name=typecode></TD>
+    <TD 
+  rowSpan=2><INPUT class=button type=submit value=" 查 询 " name=Submit></TD></TR>
+  <TR>
+    <TD>货品编码:</TD>
+    <TD><INPUT size=16 name=goodscode></TD>
+    <TD>货品名称:</TD>
+    <TD><INPUT size=16 name=goodsname></TD></TR></TBODY></TABLE></FORM>
+<DIV class=STYLE1 align=center>月销售统计</DIV><INPUT id=temp type=hidden 
+name=temp></FORM>
+<FORM name=excel action=../inc/excel.asp method=post target=_blank><INPUT 
+type=hidden value=sale_month name=table><INPUT type=hidden 
+value="select s.goodscode,goodsname,sum([01]) as t1,sum([02]) as t2,sum([03]) as t3,sum([04]) as t4,sum([05]) as t5,sum([06]) as t6,sum([07]) as t7,sum([08]) as t8,sum([09]) as t9,sum([10]) as t10,sum([11]) as t11,sum([12]) as t12 from (((((((((((((select distinct goodscode,goodsname from s_billdetail where year(adddate) = 2010) s left join (select goodscode,sum(flag*number*-1) as 01 from s_billdetail where billtype like '销售%' and month(adddate)=01 and year(adddate) = 2010 group by goodscode) s1 on s1.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 02 from s_billdetail where billtype like '销售%' and month(adddate)=02 and year(adddate) = 2010 group by goodscode) s2 on s2.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 03 from s_billdetail where billtype like '销售%' and month(adddate)=03 and year(adddate) = 2010 group by goodscode) s3 on s3.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 04 from s_billdetail where billtype like '销售%' and month(adddate)=04 and year(adddate) = 2010 group by goodscode) s4 on s4.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 05 from s_billdetail where billtype like '销售%' and month(adddate)=05 and year(adddate) = 2010 group by goodscode) s5 on s5.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 06 from s_billdetail where billtype like '销售%' and month(adddate)=06 and year(adddate) = 2010 group by goodscode) s6 on s6.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 07 from s_billdetail where billtype like '销售%' and month(adddate)=07 and year(adddate) = 2010 group by goodscode) s7 on s7.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 08 from s_billdetail where billtype like '销售%' and month(adddate)=08 and year(adddate) = 2010 group by goodscode) s8 on s8.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 09 from s_billdetail where billtype like '销售%' and month(adddate)=09 and year(adddate) = 2010 group by goodscode) s9 on s9.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 10 from s_billdetail where billtype like '销售%' and month(adddate)=10 and year(adddate) = 2010 group by goodscode) s10 on s10.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 11 from s_billdetail where billtype like '销售%' and month(adddate)=11 and year(adddate) = 2010 group by goodscode) s11 on s11.goodscode = s.goodscode) left join (select goodscode,sum(flag*number*-1) as 12 from s_billdetail where billtype like '销售%' and month(adddate)=12 and year(adddate) = 2010 group by goodscode) s12 on s12.goodscode = s.goodscode) group by s.goodscode,goodsname order by s.goodscode" 
+name=sql>
+<TABLE id=tbl onclick=sortColumn(event) width=700 align=center border=0>
+  <THEAD>
+  <TR align=middle>
+    <TH style="CURSOR: pointer" width=100 type="CaseInsensitiveString">货品名称</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">01</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">02</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">03</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">04</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">05</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">06</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">07</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">08</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">09</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">10</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">11</TH>
+    <TH style="CURSOR: pointer" width=50 type="Number">12</TH></TR></THEAD>
+  <TBODY>
+  <TR id=tr onmouseover=over() onclick=change() onmouseout=out() align=middle 
+  bgColor=#ffffff>
+    <TH></TH>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD>
+    <TD id=tb onclick=addtext(1)>0.0</TD></TR>
+  <TR id=tr onmouseover=over() onclick=change() onmouseout=out() align=middle 
+  bgColor=#ffffff>
+    <TH>新富力卡脚垫</TH>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD>
+    <TD id=tb onclick=addtext(2)>0.0</TD></TR>
+  <TR id=tr onmouseover=over() onclick=change() onmouseout=out() align=middle 
+  bgColor=#ffffff>
+    <TH>夏利脚垫</TH>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD>
+    <TD id=tb onclick=addtext(3)>0.0</TD></TR>
+  <TR id=tr onmouseover=over() onclick=change() onmouseout=out() align=middle 
+  bgColor=#ffffff>
+    <TH>奇瑞脚垫</TH>
+    <TD id=tb onclick=addtext(4)>0.0</TD>
+    <TD id=tb onclick=addtext(4)>0.0</TD>
+    <TD id=tb onclick=addtext(4)>0.0</TD>
+    <TD id=tb onclick=addtext(4)>22.0</TD>
+    <TD id=tb onclick=addtext(4)>0.0</TD>
+    <TD id=tb onclick=addtext(4)>0.0</TD>
+    <TD id=tb onclick=addtext(4)>0.0</TD>
+    <TD id=tb onclick=addtext(4)>0.0</TD>
+    <TD id=tb onclick=addtext(4)>0.0</TD>
+    <TD id=tb onclick=addtext(4)>0.0</TD>
+    <TD id=tb onclick=addtext(4)>0.0</TD>
+    <TD id=tb onclick=addtext(4)>0.0</TD></TR>
+  <TR id=tr onmouseover=over() onclick=change() onmouseout=out() align=middle 
+  bgColor=#ffffff>
+    <TH>机头水</TH>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD>
+    <TD id=tb onclick=addtext(5)>0.0</TD></TR>
+  <TR id=tr onmouseover=over() onclick=change() onmouseout=out() align=middle 
+  bgColor=#ffffff>
+    <TH>手喷漆</TH>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD>
+    <TD id=tb onclick=addtext(6)>0.0</TD></TR>
+  <TR id=tr onmouseover=over() onclick=change() onmouseout=out() align=middle 
+  bgColor=#ffffff>
+    <TH>手喷漆</TH>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD>
+    <TD id=tb onclick=addtext(7)>0.0</TD></TR>
+  <TR id=tr onmouseover=over() onclick=change() onmouseout=out() align=middle 
+  bgColor=#ffffff>
+    <TH>车锁</TH>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD>
+    <TD id=tb onclick=addtext(8)>0.0</TD></TR>
+  <TR id=tr onmouseover=over() onclick=change() onmouseout=out() align=middle 
+  bgColor=#ffffff>
+    <TH>杂类用品</TH>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD>
+    <TD id=tb onclick=addtext(9)>0.0</TD></TR>
+  <TR id=tr onmouseover=over() onclick=change() onmouseout=out() align=middle 
+  bgColor=#ffffff>
+    <TH>杂类用品</TH>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD>
+    <TD id=tb onclick=addtext(10)>0.0</TD></TR></TBODY></TABLE>
+<TABLE width=700 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH align=left colSpan=13><FONT style="FONT-FAMILY: Webdings">9 3</FONT> 
+      [1] <FONT style="FONT-FAMILY: Webdings">4 :</FONT> [页次:1/1页] [共10条] 
+[20条/页]
+      <SCRIPT>
+function tiaozhuan(){
+var yema=document.getElementById("yema").value
+document.form1.action='/lenobs/bsjxc/report/sale_month.asp?page='+yema;
+document.form1.submit();
+}
+</SCRIPT>
+       转到第：<INPUT id=yema size=1>页<LABEL class=button1><INPUT onclick=tiaozhuan() type=button value=GO></LABEL> 
+      <LABEL 
+class=button1><INPUT type=submit value=Excel></LABEL></TH></TR></TBODY></TABLE></FORM></BODY></HTML>

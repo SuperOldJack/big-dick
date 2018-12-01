@@ -1,0 +1,134 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=GB2312">
+
+
+
+
+<title>
+货品分类
+</title>
+	<link rel="StyleSheet" 
+href="../css/dtree.css" 
+type="text/css">
+    <link rel="stylesheet" 
+href="../css/style.css" 
+type="text/css">
+	<script type="text/javascript" src="../js/dtree.js"></script>
+	<script>
+	function CreateReturnValue()
+	{
+	document.getElementById('name1').value=document.getElementById('name').value;
+	document.getElementById('name2').value=document.getElementById('name').value;
+	document.getElementById('name3').value=document.getElementById('name').value;
+	}
+	function checkvalue()
+	{
+	  if (document.getElementById('pid').value=="")
+	  {
+	    alert("请选择节点！"); 
+		return false;
+	  }
+	  if (document.getElementById('name').value=="") 
+	  {
+	    alert("请输入节点的名称！");
+		return false;
+	  }
+	}
+	</script>
+</head><body bgcolor="#d6d3ce">
+<table border="0" width="100%">
+<tbody><tr valign="top"><td align="left" width="24%">
+<div class="dtree">
+	<script type="text/javascript">
+		<!--
+
+		d = new dTree('d');
+		d.add(0,-1,'货品分类','#');d.add(72,0,'化肥','#');d.add(84,72,'1','#');d.add(85,72,'2','#');d.add(86,72,'3','#');d.add(87,72,'4','#');d.add(89,72,'5','#');d.add(93,84,'22','#');
+
+document.write(d);
+
+//-->
+</script><div class="dtree">
+<!--<div class="dTreeNode"><img id="id0" 
+src="../images/base.gif" alt=""><a 
+id="sd0" class="node" 
+href="#"
+ onclick="javascript: d.s(0);">货品分类</a></div><div id="dd0" class="clip" 
+style="display: block;"><div class="dTreeNode"><a 
+href="javascript:%20d.o(1);"><img id="jd1" 
+src="../images/plusbottom.gif" alt=""></a><img
+ id="id1" src="../images/folder.gif" 
+alt=""><a id="sd1" class="node" 
+href="#"
+ onclick="javascript: d.s(1);">化肥</a></div><div id="dd1" class="clip" 
+style="display: none;"><div class="dTreeNode"><img 
+src="../images/empty.gif" alt=""><a 
+href="javascript:%20d.o(2);"><img id="jd2" 
+src="../images/plus.gif" alt=""></a><img
+ id="id2" src="../images/folder.gif" 
+alt=""><a id="sd2" class="node" 
+href="#"
+ onclick="javascript: d.s(2);">1</a></div><div id="dd2" class="clip" 
+style="display: none;"><div class="dTreeNode"><img 
+src="../images/empty.gif" alt=""><img 
+src="../images/line.gif" alt=""><img 
+src="../images/joinbottom.gif" alt=""><img
+ id="id7" src="../images/page.gif" 
+alt=""><a id="sd7" class="node" 
+href="#"
+ onclick="javascript: d.s(7);">22</a></div></div><div class="dTreeNode"><img
+ src="../images/empty.gif" alt=""><img 
+src="../images/join.gif" alt=""><img 
+id="id3" src="../images/page.gif" 
+alt=""><a id="sd3" class="node" 
+href="#"
+ onclick="javascript: d.s(3);">2</a></div><div class="dTreeNode"><img 
+src="../images/empty.gif" alt=""><img 
+src="../images/join.gif" alt=""><img 
+id="id4" src="../images/page.gif" 
+alt=""><a id="sd4" class="node" 
+href="#"
+ onclick="javascript: d.s(4);">3</a></div><div class="dTreeNode"><img 
+src="../images/empty.gif" alt=""><img 
+src="../images/join.gif" alt=""><img 
+id="id5" src="../images/page.gif" 
+alt=""><a id="sd5" class="node" 
+href="#"
+ onclick="javascript: d.s(5);">4</a></div><div class="dTreeNode"><img 
+src="../images/empty.gif" alt=""><img 
+src="../images/joinbottom.gif" alt=""><img
+ id="id6" src="../images/page.gif" 
+alt=""><a id="sd6" class="node" 
+href="#"
+ onclick="javascript: d.s(6);">5</a></div></div></div></div>
+</div>-->
+</td>
+<td width="76%">
+<input name="pid" value="" type="hidden">
+<input name="name" onpropertychange="CreateReturnValue()" type="text"><br>
+<form name="addtree1" method="post" onSubmit="return checkvalue();" 
+>
+<input name="name1" id="name1" type="hidden">
+<input name="code1" id="code1" type="hidden">
+<input value="添加下级" class="button" type="submit">
+</form>
+<form name="addtree2" method="post" onSubmit="return checkvalue();" 
+>
+<input name="name2" id="name2" type="hidden">
+<input name="code2" id="code2" type="hidden">
+<input value="增加同级" class="button" type="submit">
+</form>
+<form name="edittree" method="post" onSubmit="return checkvalue();" 
+>
+<input name="name3" id="name3" type="hidden">
+<input name="code3" id="code3" type="hidden">
+<input value="编辑节点" class="button" type="submit">
+</form>
+<form name="deltree" method="post" 
+>
+<input value="删&nbsp;&nbsp;&nbsp;&nbsp;除" class="button" type="button">
+</form>
+</td>
+</tr>
+</tbody></table>
+</body></html>

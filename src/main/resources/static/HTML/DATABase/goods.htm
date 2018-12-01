@@ -1,0 +1,557 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>货品资料</TITLE>
+<SCRIPT language=JavaScript src="../js/date.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/xmlhttp.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/order.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/showphoto.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/addrow.js"></SCRIPT>
+
+<SCRIPT>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   
+oTr.tag   =   true;
+}
+}
+
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+
+function addtext(i_row)
+{
+document.getElementById("temp").value=document.getElementById('tbl').rows[i_row].cells[0].innerHTML;
+}
+
+function GetDIV(oobj,val_i)
+{
+if (oobj == 'block')
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+else
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+ document.getElementById("search_suggest").style.display=oobj;
+ document.getElementById("temp1").value = document.getElementById('tbl').rows[val_i].cells[0].innerHTML;
+ document.getElementById("search_suggest").style.top=event.clientY+20+document.body.scrollTop;
+ document.getElementById("search_suggest").style.left=event.clientX+20+document.body.scrollLeft;
+}
+
+function CreateReturnValue(closeWindow,i){
+j=window.opener.document.all.sqd.rows.length;
+newRow=window.opener.document.all.sqd.insertRow(-1)
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML=j
+window.opener.document.getElementById("rowcount").value=j
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=delNumber type=radio >"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodscode"+j+" type=text class=INPUT1 id=goodscode"+j+" size=8 onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsname"+j+" type=text class=INPUT1 id=goodsname"+j+"  size=16  onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsunit"+j+" type=text class=INPUT1 id=goodsunit"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=units"+j+" type=text class=INPUT1 id=units"+j+"  size=3>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=price"+j+" type=text class=INPUT1 id=price"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=number"+j+" type=text class=INPUT1 id=number"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=money"+j+" type=text class=INPUT1 id=money"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=remark"+j+" type=text class=INPUT1 id=remark"+j+"  size=20><input name=aveprice"+j+" type=hidden class=INPUT1 id=aveprice"+j+"  size=20><input name=fact_num"+j+" type=hidden id=fact_number"+j+">"
+var goodscode=window.opener.document.getElementById("goodscode"+j);
+var goodsname=window.opener.document.getElementById("goodsname"+j);
+var goodsunit=window.opener.document.getElementById("goodsunit"+j);
+var units=window.opener.document.getElementById("units"+j);
+var remark=window.opener.document.getElementById("remark"+j);
+var number=window.opener.document.getElementById("number"+j);
+var price=window.opener.document.getElementById("price"+j);
+var aveprice=window.opener.document.getElementById("aveprice"+j);
+var fact_num=window.opener.document.getElementById("fact_num"+j);
+goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+goodsunit.value=document.getElementById('tbl').rows[i].cells[2].innerText;
+units.value=document.getElementById('tbl').rows[i].cells[3].innerText;
+remark.value=document.getElementById('tbl').rows[i].cells[6].innerText;
+aveprice.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+fact_num.value=document.getElementById('tbl').rows[i].cells[7].innerText;	 
+number.value=1;
+if (""=="XS")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+}
+else if (""=="XD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+} 
+else if (""=="CG")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="CD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="in")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 	 
+else
+{
+price.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+}
+//document.getElementById('tbl').deleteRow(i);
+document.getElementById('tbl').rows[i].style.display="none";
+}
+</SCRIPT>
+
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="../css/style.css" type=text/css rel=stylesheet>
+<SCRIPT language=JavaScript src="../js/exportexcel.js"></SCRIPT>
+
+<SCRIPT>
+function changegoodstype(){
+  if (document.getElementById('nodename').value == "") {
+	 document.getElementById('typecode').value ="";
+	  }	
+}
+function CreateReturnValue(){
+　　 var nodecode=document.getElementById("goodstype");
+     nodecode.value=document.getElementById('nodename').value; 
+}
+function del(){
+if (document.getElementById('temp').value == "" ){
+alert("请选贼要删除的货品资料！");
+return false;
+}
+else{
+if(!confirm('确定要删除该货品的资料吗?')){
+return false
+}else{
+window.location.href='#'
+}
+}
+}
+function edit(){
+if(document.getElementById('temp').value == "" ){
+alert("请选择要编辑的货品资料！");
+return false;
+}
+}
+</SCRIPT>
+
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY>
+<TABLE align=center>
+  <TBODY>
+  <TR>
+    <TD>
+      <FORM name=form1  method=post>
+      <TABLE border=0>
+        <TBODY>
+        <TR>
+          <TD align=right>货品编码：</TD>
+          <TD><INPUT id=goodscode size=16 name=goodscode></TD>
+          <TD align=right>货品类别：</TD>
+          <TD><INPUT id=nodename onpropertychange=changegoodstype(); size=16 
+            name=nodename><INPUT type=hidden name=typecode><A 
+            onclick="window.open ('../System/edittree2.htm', 'newwindow1', 'height=400, width=200,toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no, status=no')" 
+            href="#"><IMG 
+            height=17 src="../images/choose.gif" width=21 border=0></A> </TD>
+          <TD rowSpan=2><INPUT class=button type=button value=" 查 询 "></TD></TR>
+        <TR>
+          <TD align=right>货品名称：</TD>
+          <TD><INPUT size=16 name=goodsname></TD>
+          <TD align=right>货品规格：</TD>
+          <TD><INPUT size=16 name=goodsunit></TD></TR></TBODY></TABLE></FORM>
+      <DIV align=center><SPAN class=style1>货品资料</SPAN></DIV>
+      <FORM name=addgoods action=addgoods.htm method=post><INPUT class=button onClick="window.location.href='addgoods.htm'" type=button value=" 新 增 "> 
+<INPUT class=button onClick="return edit();" type=submit value=" 编 辑 "> <INPUT class=button  type=button value=" 删 除 "> 
+  </TD></TR>
+  <TR vAlign=top>
+    <TD><INPUT id=temp type=hidden name=temp></FORM>
+      <FORM name=excel method=post target=_blank><INPUT 
+      type=hidden value=goods name=table><INPUT type=hidden 
+      value="select * from t_goods where 1=1 " name=sql>
+      <TABLE id=tbl onclick=sortColumn(event) width=1010 align=center 
+        border=0><THEAD>
+        <TR align=middle>
+          <TH style="CURSOR: pointer" width=40 
+          type="CaseInsensitiveString">ID</TH>
+          <TH style="CURSOR: pointer" width=90 
+            type="CaseInsensitiveString">货品编码</TH>
+          <TH style="CURSOR: pointer" width=150 
+            type="CaseInsensitiveString">货品名称</TH>
+          <TH style="CURSOR: pointer" width=150 
+            type="CaseInsensitiveString">货品规格</TH>
+          <TH style="CURSOR: pointer" width=100 
+            type="CaseInsensitiveString">货品类别</TH>
+          <TH style="CURSOR: pointer" width=40 
+          type="CaseInsensitiveString">单位</TH>
+          <TH style="CURSOR: pointer" width=50 type="Number">进价</TH>
+          <TH style="CURSOR: pointer" width=50 type="Number">销售价</TH>
+          <TH style="CURSOR: pointer" width=200 
+          type="CaseInsensitiveString">备注</TH>
+          <TH style="CURSOR: pointer" width=70 type="Number">库存下限</TH>
+          <TH style="CURSOR: pointer" width=70 
+type="Number">库存上限</TH></TR></THEAD>
+        <TBODY>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(1)>1</TD>
+          <TD id=tb onclick=addtext(1)>00010</TD>
+          <TD id=tb onclick=addtext(1)>新富力卡脚垫</TD>
+          <TD id=tb onclick=addtext(1)>灰色</TD>
+          <TD id=tb onclick=addtext(1)>1</TD>
+          <TD id=tb onclick=addtext(1)>套</TD>
+          <TD id=tb onclick=addtext(1)>0.00</TD>
+          <TD id=tb onclick=addtext(1)>0.00</TD>
+          <TD id=tb onclick=addtext(1)></TD>
+          <TD id=tb onclick=addtext(1)>0.0</TD>
+          <TD id=tb onclick=addtext(1)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(2)>2</TD>
+          <TD id=tb onclick=addtext(2)>00011</TD>
+          <TD id=tb onclick=addtext(2)>夏利脚垫</TD>
+          <TD id=tb onclick=addtext(2)>灰色</TD>
+          <TD id=tb onclick=addtext(2)>脚垫</TD>
+          <TD id=tb onclick=addtext(2)>套</TD>
+          <TD id=tb onclick=addtext(2)>0.00</TD>
+          <TD id=tb onclick=addtext(2)>0.00</TD>
+          <TD id=tb onclick=addtext(2)></TD>
+          <TD id=tb onclick=addtext(2)>0.0</TD>
+          <TD id=tb onclick=addtext(2)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(3)>3</TD>
+          <TD id=tb onclick=addtext(3)>00012</TD>
+          <TD id=tb onclick=addtext(3)>奇瑞脚垫</TD>
+          <TD id=tb onclick=addtext(3)>灰色</TD>
+          <TD id=tb onclick=addtext(3)>脚垫</TD>
+          <TD id=tb onclick=addtext(3)>套</TD>
+          <TD id=tb onclick=addtext(3)>0.00</TD>
+          <TD id=tb onclick=addtext(3)>0.00</TD>
+          <TD id=tb onclick=addtext(3)></TD>
+          <TD id=tb onclick=addtext(3)>0.0</TD>
+          <TD id=tb onclick=addtext(3)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(4)>4</TD>
+          <TD id=tb onclick=addtext(4)>00013</TD>
+          <TD id=tb onclick=addtext(4)>机头水</TD>
+          <TD id=tb onclick=addtext(4)>奇威</TD>
+          <TD id=tb onclick=addtext(4)>护理品</TD>
+          <TD id=tb onclick=addtext(4)>桶</TD>
+          <TD id=tb onclick=addtext(4)>0.00</TD>
+          <TD id=tb onclick=addtext(4)>0.00</TD>
+          <TD id=tb onclick=addtext(4)></TD>
+          <TD id=tb onclick=addtext(4)>0.0</TD>
+          <TD id=tb onclick=addtext(4)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(5)>5</TD>
+          <TD id=tb onclick=addtext(5)>00014</TD>
+          <TD id=tb onclick=addtext(5)>手喷漆</TD>
+          <TD id=tb onclick=addtext(5)>白色</TD>
+          <TD id=tb onclick=addtext(5)>护理品</TD>
+          <TD id=tb onclick=addtext(5)>瓶</TD>
+          <TD id=tb onclick=addtext(5)>0.00</TD>
+          <TD id=tb onclick=addtext(5)>0.00</TD>
+          <TD id=tb onclick=addtext(5)></TD>
+          <TD id=tb onclick=addtext(5)>0.0</TD>
+          <TD id=tb onclick=addtext(5)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(6)>6</TD>
+          <TD id=tb onclick=addtext(6)>00015</TD>
+          <TD id=tb onclick=addtext(6)>手喷漆</TD>
+          <TD id=tb onclick=addtext(6)>灰色</TD>
+          <TD id=tb onclick=addtext(6)>护理品</TD>
+          <TD id=tb onclick=addtext(6)>瓶</TD>
+          <TD id=tb onclick=addtext(6)>0.00</TD>
+          <TD id=tb onclick=addtext(6)>0.00</TD>
+          <TD id=tb onclick=addtext(6)></TD>
+          <TD id=tb onclick=addtext(6)>0.0</TD>
+          <TD id=tb onclick=addtext(6)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(7)>7</TD>
+          <TD id=tb onclick=addtext(7)>00016</TD>
+          <TD id=tb onclick=addtext(7)>车锁</TD>
+          <TD id=tb onclick=addtext(7)>金点8809</TD>
+          <TD id=tb onclick=addtext(7)></TD>
+          <TD id=tb onclick=addtext(7)>个</TD>
+          <TD id=tb onclick=addtext(7)>0.00</TD>
+          <TD id=tb onclick=addtext(7)>0.00</TD>
+          <TD id=tb onclick=addtext(7)></TD>
+          <TD id=tb onclick=addtext(7)>10.0</TD>
+          <TD id=tb onclick=addtext(7)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(8)>8</TD>
+          <TD id=tb onclick=addtext(8)>00017</TD>
+          <TD id=tb onclick=addtext(8)>表板蜡</TD>
+          <TD id=tb onclick=addtext(8)>豪威</TD>
+          <TD id=tb onclick=addtext(8)>护理品</TD>
+          <TD id=tb onclick=addtext(8)>瓶</TD>
+          <TD id=tb onclick=addtext(8)>0.00</TD>
+          <TD id=tb onclick=addtext(8)>0.00</TD>
+          <TD id=tb onclick=addtext(8)></TD>
+          <TD id=tb onclick=addtext(8)>0.0</TD>
+          <TD id=tb onclick=addtext(8)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(9)>9</TD>
+          <TD id=tb onclick=addtext(9)>00018</TD>
+          <TD id=tb onclick=addtext(9)>杂类用品</TD>
+          <TD id=tb onclick=addtext(9)>R牌指南球166</TD>
+          <TD id=tb onclick=addtext(9)></TD>
+          <TD id=tb onclick=addtext(9)>个</TD>
+          <TD id=tb onclick=addtext(9)>0.00</TD>
+          <TD id=tb onclick=addtext(9)>0.00</TD>
+          <TD id=tb onclick=addtext(9)></TD>
+          <TD id=tb onclick=addtext(9)>0.0</TD>
+          <TD id=tb onclick=addtext(9)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(10)>10</TD>
+          <TD id=tb onclick=addtext(10)>00019</TD>
+          <TD id=tb onclick=addtext(10)>杂类用品</TD>
+          <TD id=tb onclick=addtext(10)>R牌指南球301</TD>
+          <TD id=tb onclick=addtext(10)></TD>
+          <TD id=tb onclick=addtext(10)>个</TD>
+          <TD id=tb onclick=addtext(10)>0.00</TD>
+          <TD id=tb onclick=addtext(10)>0.00</TD>
+          <TD id=tb onclick=addtext(10)></TD>
+          <TD id=tb onclick=addtext(10)>0.0</TD>
+          <TD id=tb onclick=addtext(10)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(11)>11</TD>
+          <TD id=tb onclick=addtext(11)>00020</TD>
+          <TD id=tb onclick=addtext(11)>挡泥板</TD>
+          <TD id=tb onclick=addtext(11)>桑塔纳2000</TD>
+          <TD id=tb onclick=addtext(11)></TD>
+          <TD id=tb onclick=addtext(11)>套</TD>
+          <TD id=tb onclick=addtext(11)>0.00</TD>
+          <TD id=tb onclick=addtext(11)>0.00</TD>
+          <TD id=tb onclick=addtext(11)></TD>
+          <TD id=tb onclick=addtext(11)>0.0</TD>
+          <TD id=tb onclick=addtext(11)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(12)>12</TD>
+          <TD id=tb onclick=addtext(12)>00021</TD>
+          <TD id=tb onclick=addtext(12)>脚垫</TD>
+          <TD id=tb onclick=addtext(12)>盘形薄小</TD>
+          <TD id=tb onclick=addtext(12)>脚垫</TD>
+          <TD id=tb onclick=addtext(12)>套</TD>
+          <TD id=tb onclick=addtext(12)>0.00</TD>
+          <TD id=tb onclick=addtext(12)>0.00</TD>
+          <TD id=tb onclick=addtext(12)></TD>
+          <TD id=tb onclick=addtext(12)>0.0</TD>
+          <TD id=tb onclick=addtext(12)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(13)>13</TD>
+          <TD id=tb onclick=addtext(13)>00022</TD>
+          <TD id=tb onclick=addtext(13)>脚垫</TD>
+          <TD id=tb onclick=addtext(13)>盘形新</TD>
+          <TD id=tb onclick=addtext(13)>脚垫</TD>
+          <TD id=tb onclick=addtext(13)>套</TD>
+          <TD id=tb onclick=addtext(13)>0.00</TD>
+          <TD id=tb onclick=addtext(13)>0.00</TD>
+          <TD id=tb onclick=addtext(13)></TD>
+          <TD id=tb onclick=addtext(13)>0.0</TD>
+          <TD id=tb onclick=addtext(13)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(14)>14</TD>
+          <TD id=tb onclick=addtext(14)>00023</TD>
+          <TD id=tb onclick=addtext(14)>脚垫</TD>
+          <TD id=tb onclick=addtext(14)>盘形厚</TD>
+          <TD id=tb onclick=addtext(14)>脚垫</TD>
+          <TD id=tb onclick=addtext(14)>套</TD>
+          <TD id=tb onclick=addtext(14)>0.00</TD>
+          <TD id=tb onclick=addtext(14)>0.00</TD>
+          <TD id=tb onclick=addtext(14)></TD>
+          <TD id=tb onclick=addtext(14)>0.0</TD>
+          <TD id=tb onclick=addtext(14)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(15)>15</TD>
+          <TD id=tb onclick=addtext(15)>00024</TD>
+          <TD id=tb onclick=addtext(15)>脚垫</TD>
+          <TD id=tb onclick=addtext(15)>盆形薄</TD>
+          <TD id=tb onclick=addtext(15)>脚垫</TD>
+          <TD id=tb onclick=addtext(15)>套</TD>
+          <TD id=tb onclick=addtext(15)>0.00</TD>
+          <TD id=tb onclick=addtext(15)>0.00</TD>
+          <TD id=tb onclick=addtext(15)></TD>
+          <TD id=tb onclick=addtext(15)>0.0</TD>
+          <TD id=tb onclick=addtext(15)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(16)>16</TD>
+          <TD id=tb onclick=addtext(16)>00025</TD>
+          <TD id=tb onclick=addtext(16)>脚垫</TD>
+          <TD id=tb onclick=addtext(16)>盆形厚</TD>
+          <TD id=tb onclick=addtext(16)>脚垫</TD>
+          <TD id=tb onclick=addtext(16)>套</TD>
+          <TD id=tb onclick=addtext(16)>0.00</TD>
+          <TD id=tb onclick=addtext(16)>0.00</TD>
+          <TD id=tb onclick=addtext(16)></TD>
+          <TD id=tb onclick=addtext(16)>0.0</TD>
+          <TD id=tb onclick=addtext(16)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(17)>17</TD>
+          <TD id=tb onclick=addtext(17)>00026</TD>
+          <TD id=tb onclick=addtext(17)>脚垫</TD>
+          <TD id=tb onclick=addtext(17)>新盆形</TD>
+          <TD id=tb onclick=addtext(17)>脚垫</TD>
+          <TD id=tb onclick=addtext(17)>套</TD>
+          <TD id=tb onclick=addtext(17)>0.00</TD>
+          <TD id=tb onclick=addtext(17)>0.00</TD>
+          <TD id=tb onclick=addtext(17)></TD>
+          <TD id=tb onclick=addtext(17)>0.0</TD>
+          <TD id=tb onclick=addtext(17)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(18)>18</TD>
+          <TD id=tb onclick=addtext(18)>00027</TD>
+          <TD id=tb onclick=addtext(18)>脚垫</TD>
+          <TD id=tb onclick=addtext(18)>福娃</TD>
+          <TD id=tb onclick=addtext(18)>脚垫</TD>
+          <TD id=tb onclick=addtext(18)>套</TD>
+          <TD id=tb onclick=addtext(18)>0.00</TD>
+          <TD id=tb onclick=addtext(18)>0.00</TD>
+          <TD id=tb onclick=addtext(18)></TD>
+          <TD id=tb onclick=addtext(18)>0.0</TD>
+          <TD id=tb onclick=addtext(18)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(19)>19</TD>
+          <TD id=tb onclick=addtext(19)>00028</TD>
+          <TD id=tb onclick=addtext(19)>脚垫</TD>
+          <TD id=tb onclick=addtext(19)>水晶方块</TD>
+          <TD id=tb onclick=addtext(19)>脚垫</TD>
+          <TD id=tb onclick=addtext(19)>套</TD>
+          <TD id=tb onclick=addtext(19)>0.00</TD>
+          <TD id=tb onclick=addtext(19)>0.00</TD>
+          <TD id=tb onclick=addtext(19)></TD>
+          <TD id=tb onclick=addtext(19)>0.0</TD>
+          <TD id=tb onclick=addtext(19)>0.0</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(20)>20</TD>
+          <TD id=tb onclick=addtext(20)>00029</TD>
+          <TD id=tb onclick=addtext(20)>脚垫</TD>
+          <TD id=tb onclick=addtext(20)>水晶方块本田</TD>
+          <TD id=tb onclick=addtext(20)>脚垫</TD>
+          <TD id=tb onclick=addtext(20)>套</TD>
+          <TD id=tb onclick=addtext(20)>0.00</TD>
+          <TD id=tb onclick=addtext(20)>0.00</TD>
+          <TD id=tb onclick=addtext(20)></TD>
+          <TD id=tb onclick=addtext(20)>0.0</TD>
+          <TD id=tb onclick=addtext(20)>0.0</TD></TR></TBODY>
+        <TBODY>
+        <TR onmouseover=over() onclick=change() onmouseout=out()>
+          <TD align=middle>小计</TD>
+          <TD align=middle></TD>
+          <TD align=middle></TD>
+          <TD align=middle></TD>
+          <TD align=middle></TD>
+          <TD align=middle></TD>
+          <TD align=middle>0</TD>
+          <TD align=middle>0</TD>
+          <TD align=middle></TD>
+          <TD align=middle>10</TD>
+          <TD align=middle>0</TD></TR></TBODY></TABLE>
+      <TABLE width=1010 align=center border=0>
+        <TBODY>
+        <TR>
+          <TH align=left colSpan=11><FONT style="FONT-FAMILY: Webdings">9 
+            3</FONT> [1] [<A 
+            onclick="document.form1.action='#';document.form1.submit();" 
+            href="#">2</A>] 
+            [<A 
+            onclick="document.form1.action='#';document.form1.submit();" 
+            href="#">3</A>] 
+            [<A 
+            onclick="document.form1.action='#';document.form1.submit();" 
+            href="#">4</A>] 
+            [<A 
+            onclick="document.form1.action='#';document.form1.submit();" 
+            href="#">5</A>] 
+            <FONT style="FONT-FAMILY: Webdings"><A 
+            onclick="document.form1.action='#';document.form1.submit();" 
+            href="#">4</A> 
+            <A 
+            onclick="document.form1.action='#';document.form1.submit();" 
+            href="#">:</A></FONT> 
+            [页次:1/105页] [共2082条] [20条/页]
+            <SCRIPT>
+function tiaozhuan(){
+var yema=document.getElementById("yema").value
+document.form1.action='#';
+document.form1.submit();
+}
+</SCRIPT>
+             转到第：<INPUT id=yema size=1>页<LABEL class=button1><INPUT onclick=tiaozhuan() type=button value=GO></LABEL> 
+            <LABEL 
+        class=button1><INPUT type=submit value=Excel></LABEL></TH></TR></TBODY></TABLE></FORM></TD></TR></TBODY></TABLE></BODY></HTML>

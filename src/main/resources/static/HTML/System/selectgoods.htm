@@ -1,0 +1,144 @@
+<html><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=GB2312">
+<link rel="stylesheet" href="../css/style.css" 
+type="text/css">
+<title>选择商品</title>
+</head><body>　　 <script>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   oTr.tag   =   true;
+}
+}
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+　　 function CreateReturnValue(closeWindow,i)
+　　 {
+　　 var goodscode=window.opener.document.getElementById("goodscode");
+     var goodsname=window.opener.document.getElementById("goodsname");
+　　 goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+     goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+　　 if (closeWindow)
+　　 {
+　　 window.opener=null;
+　　 window.close();
+　　 }
+　　 }
+　　 </script>
+
+<table>
+<form name="form1" method="post" action="selectgoods.asp?id="></form>
+<tbody><tr>
+   <td>货品编码</td>
+   <td><input name="s_goodscode" size="16" type="text"></td>
+   <td>货品名称</td>
+   <td><input name="s_goodsname" size="16" type="text"></td>
+   <td><input name="select" value=" 查 询 " onClick="" class="button" 
+type="submit"></td>
+</tr>
+
+</tbody></table>
+<table id="tbl" width="100%">
+<tbody><tr align="center">
+  <th width="15%">货品编码</th>
+  <th width="25%">货品名称</th>
+  <th width="15%">货品规格</th>
+  <th width="5%">单位</th>
+  <th width="40%">备注</th>
+</tr>
+	<tr onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,1);" align="center"><td>00010</td><td>新
+富力卡脚垫</td><td>灰色</td><td>套</td><td>&nbsp;</td></tr><tr 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,2);" align="center"><td>00011</td><td>夏
+利脚垫</td><td>灰色</td><td>套</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,3);" align="center"><td>00012</td><td>奇
+瑞脚垫</td><td>灰色</td><td>套</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,4);" align="center"><td>00013</td><td>机
+头水</td><td>奇威</td><td>桶</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,5);" align="center"><td>00014</td><td>手
+喷漆</td><td>白色</td><td>瓶</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,6);" align="center"><td>00015</td><td>手
+喷漆</td><td>灰色</td><td>瓶</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,7);" align="center"><td>00016</td><td>车
+锁</td><td>金点8809</td><td>支</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,8);" align="center"><td>00017</td><td>表
+板蜡</td><td>豪威</td><td>瓶</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,9);" align="center"><td>00018</td><td>杂
+类用品</td><td>R牌指南球166</td><td>个</td><td></td></tr><tr 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,10);" align="center"><td>00019</td><td>杂
+类用品</td><td>R牌指南球301</td><td>个</td><td></td></tr><tr 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,11);" align="center"><td>00020</td><td>挡
+泥板</td><td>桑塔纳2000</td><td>套</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,12);" align="center"><td>00021</td><td>脚
+垫</td><td>盘形薄小</td><td>套</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,13);" align="center"><td>00022</td><td>脚
+垫</td><td>盘形新</td><td>套</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,14);" align="center"><td>00023</td><td>脚
+垫</td><td>盘形厚</td><td>套</td><td></td></tr><tr onMouseOver="over()" 
+onclick="change()" onMouseOut="out()" 
+ondblclick="CreateReturnValue(true,15);" align="center"><td>00024</td><td>脚
+垫</td><td>盆形薄</td><td>套</td><td></td></tr>
+</tbody></table>
+<p align="center">
+<a href="#" 
+onclick="document.form1.action='selectgoods.asp?page=1';document.form1.submit();">首
+页</a>
+<a href="#" 
+onclick="document.form1.action='selectgoods.asp?page=0';document.form1.submit();">前
+一页</a>&nbsp;
+<a href="#" 
+onclick="document.form1.action='selectgoods.asp?page=2';document.form1.submit();">后
+一页</a>&nbsp;
+<a href="#" 
+onclick="document.form1.action='selectgoods.asp?page=139';document.form1.submit();">末
+页</a>&nbsp;
+<script>
+function tiaozhuan(){
+var yema=document.getElementById("yema").value
+document.form1.action='#';
+document.form1.submit();
+}
+</script>
+<input id="yema" size="2" type="text"><input value="GO" 
+onclick="tiaozhuan()" type="button">
+现在是第1页一共有139页</p>
+</body></html>

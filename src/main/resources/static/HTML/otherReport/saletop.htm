@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML><HEAD><TITLE>利润分析</TITLE>
+<SCRIPT language=JavaScript src="../js/date.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/xmlhttp.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/order.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/showphoto.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/addrow.js"></SCRIPT>
+
+<SCRIPT>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   
+oTr.tag   =   true;
+}
+}
+
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+
+function addtext(i_row)
+{
+document.getElementById("temp").value=document.getElementById('tbl').rows[i_row].cells[0].innerHTML;
+}
+
+function GetDIV(oobj,val_i)
+{
+if (oobj == 'block')
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+else
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+ document.getElementById("search_suggest").style.display=oobj;
+ document.getElementById("temp1").value = document.getElementById('tbl').rows[val_i].cells[0].innerHTML;
+ document.getElementById("search_suggest").style.top=event.clientY+20+document.body.scrollTop;
+ document.getElementById("search_suggest").style.left=event.clientX+20+document.body.scrollLeft;
+}
+
+function CreateReturnValue(closeWindow,i){
+j=window.opener.document.all.sqd.rows.length;
+newRow=window.opener.document.all.sqd.insertRow(-1)
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML=j
+window.opener.document.getElementById("rowcount").value=j
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=delNumber type=radio >"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodscode"+j+" type=text class=INPUT1 id=goodscode"+j+" size=8 onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsname"+j+" type=text class=INPUT1 id=goodsname"+j+"  size=16  onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsunit"+j+" type=text class=INPUT1 id=goodsunit"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=units"+j+" type=text class=INPUT1 id=units"+j+"  size=3>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=price"+j+" type=text class=INPUT1 id=price"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=number"+j+" type=text class=INPUT1 id=number"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=money"+j+" type=text class=INPUT1 id=money"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=remark"+j+" type=text class=INPUT1 id=remark"+j+"  size=20><input name=aveprice"+j+" type=hidden class=INPUT1 id=aveprice"+j+"  size=20><input name=fact_num"+j+" type=hidden id=fact_number"+j+">"
+var goodscode=window.opener.document.getElementById("goodscode"+j);
+var goodsname=window.opener.document.getElementById("goodsname"+j);
+var goodsunit=window.opener.document.getElementById("goodsunit"+j);
+var units=window.opener.document.getElementById("units"+j);
+var remark=window.opener.document.getElementById("remark"+j);
+var number=window.opener.document.getElementById("number"+j);
+var price=window.opener.document.getElementById("price"+j);
+var aveprice=window.opener.document.getElementById("aveprice"+j);
+var fact_num=window.opener.document.getElementById("fact_num"+j);
+goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+goodsunit.value=document.getElementById('tbl').rows[i].cells[2].innerText;
+units.value=document.getElementById('tbl').rows[i].cells[3].innerText;
+remark.value=document.getElementById('tbl').rows[i].cells[6].innerText;
+aveprice.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+fact_num.value=document.getElementById('tbl').rows[i].cells[7].innerText;	 
+number.value=1;
+if (""=="XS")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+}
+else if (""=="XD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+} 
+else if (""=="CG")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="CD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="in")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 	 
+else
+{
+price.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+}
+//document.getElementById('tbl').deleteRow(i);
+document.getElementById('tbl').rows[i].style.display="none";
+}
+</SCRIPT>
+
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="../css/style.css" type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY>
+<TABLE align=center>
+  <TBODY>
+  <TR>
+    <TD>
+      <FORM id=form1 name=sample  method=post>
+      <TABLE id=tbl_tittle width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD align=right width=70 height=24>仓库名称：</TD>
+          <TD width=150><SELECT name=depot><OPTION value="" 
+              selected></OPTION><OPTION value=库房>库房</OPTION></SELECT> </TD>
+          <TD align=right width=70>货品分类：</TD>
+          <TD width=150><LABEL><INPUT type=hidden name=typecode> <INPUT 
+            id=nodename size=16 name=nodename><A 
+            onclick="window.open ('../System/edittree2.htm', 'newwindow1', 'height=400, width=200,toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no, status=yes')" 
+            href="#"><IMG 
+            height=17 src="../images/choose.gif" width=21 
+          border=0></A></LABEL></TD>
+          <TD rowSpan=3><INPUT class=button type=submit value=" 查 询 " name=Submit> 
+          </TD></TR>
+        <TR>
+          <TD align=right height=26>从&nbsp;日&nbsp;期：</TD>
+          <TD><LABEL><INPUT size=16 value=2010-4-1 name=date1><INPUT 
+            style="CURSOR: hand" onClick="setDay(date1);return false;" 
+            type=image height=16 width=18 src="../images/date.gif"></LABEL></TD>
+          <TD align=right>到&nbsp;日&nbsp;期：</TD>
+          <TD><INPUT size=16 value=2010-4-16 name=date2><INPUT 
+            style="CURSOR: hand" onClick="setDay(date2);return false;" 
+            type=image height=16 width=18 src="../images/date.gif"></TD></TR>
+        <TR>
+          <TD align=right>货品规格：</TD>
+          <TD><INPUT name=goodsunit></TD></TR></TBODY></TABLE></FORM>
+      <DIV align=center><SPAN class=style1>销售排行</SPAN></DIV><INPUT id=temp 
+      type=hidden name=temp></FORM>
+      <FORM name=excel action=../inc/excel.asp method=post target=_blank><INPUT 
+      type=hidden value=SaleTaxis name=table><INPUT type=hidden 
+      value="select goodscode,goodsname,iif(sum(number*flag*-1) is null,0,sum(number*flag*-1)) as salenum,iif(sum(money*flag*-1) is null,0,sum(money*flag*-1)) as salemon,iif(sum(number*(price-inprice)*flag*-1) is null,0,sum(number*(price-inprice)*flag*-1)) as gain from s_billdetail where billtype like '销售%' and (AddDate)<=#2010-4-16# and (AddDate)>=#2010-4-1# and depotname in ('酒泉库','武威库','张掖库','成品仓','库房',) group by goodscode,goodsname" 
+      name=sql>
+      <TABLE id=tbl onclick=sortColumn(event) width=570 align=center border=0>
+        <THEAD>
+        <TR align=middle>
+          <TH style="CURSOR: pointer" width=100 
+            type="CaseInsensitiveString">货品编码</TH>
+          <TH style="CURSOR: pointer" width=200 
+            type="CaseInsensitiveString">货品名称</TH>
+          <TH style="CURSOR: pointer" width=90 
+            type="CaseInsensitiveString">销售数量</TH>
+          <TH style="CURSOR: pointer" width=90 type="Number">销售金额</TH>
+          <TH style="CURSOR: pointer" width=90 type="Number">利润</TH></TR></THEAD>
+        <TBODY>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(1)>00010</TD>
+          <TD id=tb onclick=addtext(1)>新富力卡脚垫</TD>
+          <TD id=tb onclick=addtext(1)>0</TD>
+          <TD id=tb onclick=addtext(1)>0.00</TD>
+          <TD id=tb onclick=addtext(1)>0.00</TD></TR>
+        <TR id=tr onmouseover=over() onclick=change() onmouseout=out() 
+        align=middle bgColor=#ffffff>
+          <TD id=tb onclick=addtext(2)>00012</TD>
+          <TD id=tb onclick=addtext(2)>奇瑞脚垫</TD>
+          <TD id=tb onclick=addtext(2)>22</TD>
+          <TD id=tb onclick=addtext(2)>726.00</TD>
+          <TD id=tb onclick=addtext(2)>-6380.00</TD></TR></TBODY>
+        <TBODY>
+        <TR onmouseover=over() onclick=change() onmouseout=out()>
+          <TD align=middle>小计</TD>
+          <TD align=middle></TD>
+          <TD align=middle>22</TD>
+          <TD align=middle>726</TD>
+          <TD align=middle>-6380</TD></TR></TBODY></TABLE>
+      <TABLE width=570 align=center border=0>
+        <TBODY>
+        <TR>
+          <TH align=left colSpan=5><FONT style="FONT-FAMILY: Webdings">9 
+            3</FONT> [1] <FONT style="FONT-FAMILY: Webdings">4 :</FONT> 
+            [页次:1/1页] [共2条] [20条/页]
+            <SCRIPT>
+function tiaozhuan(){
+var yema=document.getElementById("yema").value
+document.form1.action='/lenobs/bsjxc/report/saletop.asp?page='+yema;
+document.form1.submit();
+}
+</SCRIPT>
+             转到第：<INPUT id=yema size=1>页<LABEL class=button1><INPUT onclick=tiaozhuan() type=button value=GO></LABEL> 
+            <LABEL 
+        class=button1><INPUT type=submit value=Excel></LABEL></TH></TR></TBODY></TABLE></FORM></TD></TR></TBODY></TABLE></BODY></HTML>

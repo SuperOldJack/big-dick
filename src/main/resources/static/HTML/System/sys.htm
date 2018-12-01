@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML><HEAD><TITLE>系统设置</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="../css/style.css" type=text/css rel=stylesheet>
+<SCRIPT>
+function goods()
+{
+window.open ('edittree.htm', 'newwindow', 'height=400, width=300,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
+}
+function cust()
+{
+window.open ('edittree1.htm', 'newwindow', 'height=400, width=300,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
+}
+function depot()
+{
+window.open ('../DATABase/depot.htm', 'newwindow', 'height=400, width=300,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
+}
+function units()
+{
+window.open ('../DATABase/units.htm', 'newwindow', 'height=400, width=300,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
+}
+function cashtype()
+{
+window.open ('cashtype.htm', 'newwindow', 'height=400, width=300,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
+}
+function fieldshow(tablename)
+{
+window.open (''+tablename+'', 'newwindow', 'top=100,left=150,height=600, width=800,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
+}
+function record()
+{
+window.open ('record.htm', 'newwindow', 'top=100,left=150,height=600, width=800,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
+}
+</SCRIPT>
+
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY bgColor=#f7f7f7><BR>
+<DIV align=center><SPAN class=style1>系统设置</SPAN><BR>
+<TABLE width=760 border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD>
+      <FIELDSET style="PADDING-BOTTOM: 5px"><LEGEND>显示设置</LEGEND>
+      <FORM name=form1 action=../action/editsys.asp method=post>
+      <TABLE width=200 align=center border=0>
+        <TBODY>
+        <TR>
+          <TD align=left width=100 colSpan=3>显示记录条数</TD>
+          <TD colSpan=3><INPUT size=2 value=20 name=pagerecord></TD></TR>
+        <TR>
+          <TD colSpan=6>显示小数点位数</TD></TR>
+        <TR>
+          <TD align=right>数量</TD>
+          <TD><INPUT size=2 value=1 name=dotnum></TD>
+          <TD align=right>单价</TD>
+          <TD><INPUT size=2 value=2 name=dotprice></TD>
+          <TD align=right>金额</TD>
+          <TD><INPUT size=2 value=2 name=dotmon></TD></TR>
+        <TR>
+          <TD colSpan=4>货品资料列表中显示图片</TD>
+          <TD colSpan=2><SELECT name=showphoto><OPTION value=true>是</OPTION> 
+              <OPTION value=false selected>否</OPTION></SELECT> </TD></TR>
+        <TR>
+          <TD colSpan=4>是否允许负出库</TD>
+          <TD colSpan=2><SELECT name=fuchuku><OPTION value=true 
+              selected>是</OPTION> <OPTION value=false>否</OPTION></SELECT> 
+        </TD></TR></TBODY></TABLE>
+      <DIV align=center><INPUT class=button type=button value=" 提 交 " name=Submit></DIV></FORM>
+      <TABLE width="100%">
+        <TBODY>
+        <TR>
+          <TD align=middle width="33%"><A onClick="fieldshow('../ReportBill/allbill.htm')" 
+            href="#">单据查询</A></TD>
+          <TD align=middle width="33%"><A onClick="fieldshow('../ReportBill/Viewdepot.htm')" 
+            href="#">库存数量查询</A></TD>
+          <TD align=middle width="33%"><A onClick="fieldshow('../ReportBill/depotwarn.htm')" 
+            href="#">库存报警</A></TD></TR>
+        <TR>
+          <TD align=middle width="33%"><A onClick="fieldshow('../ReportBill/depotcount.htm')" 
+            href="#">库存汇总</A></TD>
+          <TD align=middle width="33%"><A onClick="fieldshow('../ReportBill/depotdetail.htm')" 
+            href="#">库存明细</A></TD>
+          <TD align=middle width="33%"><A onClick="fieldshow('../otherReport/otherdetail.htm')" 
+            href="#">其他明细报表</A></TD></TR>
+        <TR>
+          <TD align=middle width="33%"><A onClick="fieldshow('../otherReport/saletop.htm')" 
+            href="#">销售排行</A></TD>
+          <TD align=middle width="33%"><A onClick="fieldshow('../otherReport/jxc.htm')" 
+            href="#">进销存报表</A></TD>
+          <TD align=middle width="33%"><A onClick="fieldshow('../DATABase/custom.htm')" 
+            href="#">往来单位资料</A></TD></TR>
+        <TR>
+          <TD align=middle width="33%"><A onClick="fieldshow('../DATABase/goods.htm')" 
+            href="#">货品资料</A></TD>
+          <TD align=middle width="33%"><A onClick="fieldshow('../DATABase/employee.htm')" 
+            href="#">员工信息</A></TD>
+          <TD align=middle width="33%"><A 
+            onclick="fieldshow('../Bills/goodsbuycount.htm')" 
+            href="#">货品采购汇总表</A></TD></TR>
+        <TR>
+          <TD align=middle width="33%"><A 
+            onclick="fieldshow('../Bills/goodsbuydetail.htm')" 
+            href="#">采购明细表</A></TD>
+          <TD align=middle width="33%"><A 
+            onclick="fieldshow('../Bills/custbuycount.htm')" 
+            href="#">供应商采购汇总表</A></TD>
+          <TD align=middle width="33%"><A onClick="fieldshow('../Bills/orderdetail.htm')" 
+            href="#">订单完成情况</A></TD></TR>
+        <TR>
+          <TD align=middle width="33%"><A 
+            onclick="fieldshow('../SFA/goodssalecount.htm')" 
+            href="#">货品销售汇总表</A></TD>
+          <TD align=middle width="33%"><A 
+            onclick="fieldshow('../SFA/goodssaledetail.htm')" 
+            href="#">销售明细表</A></TD>
+          <TD align=middle width="33%"><A 
+            onclick="fieldshow('../SFA/custsalecount.htm')" 
+            href="#">客户销售汇总表</A></TD></TR></TBODY></TABLE></FIELDSET> 
+    </TD>
+    <TD>
+      <FIELDSET style="PADDING-BOTTOM: 5px"><LEGEND>信息设置</LEGEND>
+      <TABLE height=135 width="100%" align=center border=0>
+        <TBODY>
+        <TR>
+          <TD align=middle><INPUT class=button onclick=goods(); type=button value=货品分类></TD>
+          <TD align=middle><INPUT class=button onclick=cust(); type=button value=往来单位分类></TD></TR>
+        <TR>
+          <TD align=middle><INPUT class=button onclick=depot(); type=button value=仓库管理></TD>
+          <TD align=middle><INPUT class=button onclick=units(); type=button value=计量单位管理></TD></TR>
+        <TR>
+          <TD align=middle><INPUT class=button onclick=cashtype(); type=button value=支付方式></TD>
+          <TD align=middle><INPUT class=button onclick=record(); type=button value=查看登陆日志></TD></TR></TBODY></TABLE></FIELDSET></TD></TR>
+  <DIV></DIV></TBODY></DIV></BODY></HTML>

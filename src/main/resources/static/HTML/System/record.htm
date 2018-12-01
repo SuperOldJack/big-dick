@@ -1,0 +1,311 @@
+<html><head>
+
+<script language="JavaScript" src="../js/date.js"></script>
+<script language="JavaScript" src="../js/xmlhttp.js"></script>
+<script language="JavaScript" src="../js/order.js"></script>
+<script language="JavaScript" src="../js/showphoto.js"></script><script language="JavaScript" src="../js/addrow.js"></script><script language="JavaScript" src="../js/jquery.js"></script><script>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   
+oTr.tag   =   true;
+}
+}
+
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+
+function addtext(i_row,str)
+{
+document.getElementById("temp").value=str;
+}
+
+function GetDIV(oobj,val_i,str)
+{
+if (oobj == 'block')
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+else
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+ document.getElementById("search_suggest").style.display=oobj;
+ document.getElementById("temp1").value = str;
+ document.getElementById("search_suggest").style.top=event.clientY+20+document.body.scrollTop;
+ document.getElementById("search_suggest").style.left=event.clientX+20+document.body.scrollLeft;
+}
+
+function CreateReturnValue(closeWindow,i){
+j=window.opener.document.all.sqd.rows.length;
+newRow=window.opener.document.all.sqd.insertRow(-1)
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML=j
+window.opener.document.getElementById("rowcount").value=j
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=delNumber type=radio >"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodscode"+j+" type=text class=INPUT1 id=goodscode"+j+" size=8 onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsname"+j+" type=text class=INPUT1 id=goodsname"+j+"  size=16  onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsunit"+j+" type=text class=INPUT1 id=goodsunit"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=units"+j+" type=text class=INPUT1 id=units"+j+"  size=3>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=price"+j+" type=text class=INPUT1 id=price"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=number"+j+" type=text class=INPUT1 id=number"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=money"+j+" type=text class=INPUT1 id=money"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=remark"+j+" type=text class=INPUT1 id=remark"+j+"  size=20><input name=aveprice"+j+" type=hidden class=INPUT1 id=aveprice"+j+"  size=20><input name=fact_num"+j+" type=hidden id=fact_number"+j+">"
+var goodscode=window.opener.document.getElementById("goodscode"+j);
+var goodsname=window.opener.document.getElementById("goodsname"+j);
+var goodsunit=window.opener.document.getElementById("goodsunit"+j);
+var units=window.opener.document.getElementById("units"+j);
+var remark=window.opener.document.getElementById("remark"+j);
+var number=window.opener.document.getElementById("number"+j);
+var price=window.opener.document.getElementById("price"+j);
+var aveprice=window.opener.document.getElementById("aveprice"+j);
+var fact_num=window.opener.document.getElementById("fact_num"+j);
+goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+goodsunit.value=document.getElementById('tbl').rows[i].cells[2].innerText;
+units.value=document.getElementById('tbl').rows[i].cells[3].innerText;
+remark.value=document.getElementById('tbl').rows[i].cells[6].innerText;
+aveprice.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+fact_num.value=document.getElementById('tbl').rows[i].cells[7].innerText;	 
+number.value=1;
+if (""=="XS")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+}
+else if (""=="XD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+} 
+else if (""=="CG")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="CD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="in")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 	 
+else
+{
+price.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+}
+//document.getElementById('tbl').deleteRow(i);
+document.getElementById('tbl').rows[i].style.display="none";
+}
+</script><meta
+ http-equiv="Content-Type" content="text/html; charset=GB2312"><link 
+rel="stylesheet" 
+href="../css/style.css"
+ type="text/css"><title>登陆日志</title></head><body><span id="hintdiv" 
+style="display: none; position: absolute; z-index: 500;"></span>
+
+
+
+
+
+
+
+
+
+
+
+<form name="form1" method="post" action="record.asp">
+<table align="center" border="0">
+<tbody><tr>
+  <td align="right" height="26">从&nbsp;日&nbsp;期：</td>
+  <td><input name="date1" size="16" value="2010-4-1" type="text"><input 
+src="../images/date.gif"
+ style="" onClick="setDay(date1);return false;" type="image" height="16"
+ width="18"></td>
+  <td align="right">到&nbsp;日&nbsp;期：</td>
+  <td><input name="date2" size="16" value="2010-4-17" type="text"><input
+ 
+src="../images/date.gif"
+ style="" onClick="setDay(date2);return false;" type="image" height="16"
+ width="18"></td>
+  <td><input class="button" value="查询" type="button"></td>
+</tr>
+</tbody></table>
+</form>
+<input name="temp" id="temp" type="hidden"><form name="excel" 
+method="post" target="_blank" action="../inc/excel.asp"><input 
+name="table" value="record" type="hidden"><input name="sql" 
+value="select * from t_record where (date)&lt;=#2010-4-17# and 
+(date)&gt;=#2010-4-1# order by date desc" type="hidden"><table id="tbl" 
+onclick="sortColumn(event)" align="center" border="0" width="600px"><thead><tr
+ align="center"><th type="CaseInsensitiveString" style="cursor: 
+pointer;" width="200px">登陆用户名</th><th type="CaseInsensitiveString" 
+style="cursor: pointer;" width="200px">登陆日期</th><th 
+type="CaseInsensitiveString" style="cursor: pointer;" width="200px">登陆IP</th></tr></thead><tbody><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" onClick="addtext(1,'user')">user</td><td
+ id="tb" onClick="addtext(1,'user')">2010-4-16 23:28:33</td><td id="tb" 
+onclick="addtext(1,'user')">210.83.85.130</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" onClick="addtext(2,'user')">user</td><td
+ id="tb" onClick="addtext(2,'user')">2010-4-16 23:28:32</td><td id="tb" 
+onclick="addtext(2,'user')">210.83.85.130</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" onClick="addtext(3,'user')">user</td><td
+ id="tb" onClick="addtext(3,'user')">2010-4-16 22:24:24</td><td id="tb" 
+onclick="addtext(3,'user')">210.83.85.130</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" onClick="addtext(4,'user')">user</td><td
+ id="tb" onClick="addtext(4,'user')">2010-4-16 20:44:26</td><td id="tb" 
+onclick="addtext(4,'user')">210.83.85.130</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" onClick="addtext(5,'user')">user</td><td
+ id="tb" onClick="addtext(5,'user')">2010-4-16 19:21:42</td><td id="tb" 
+onclick="addtext(5,'user')">61.186.249.184</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(6,'admin')">admin</td><td id="tb" 
+onclick="addtext(6,'admin')">2010-4-16 16:27:28</td><td id="tb" 
+onclick="addtext(6,'admin')">119.100.78.181</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(7,'admin')">admin</td><td id="tb" 
+onclick="addtext(7,'admin')">2010-4-16 16:27:28</td><td id="tb" 
+onclick="addtext(7,'admin')">119.100.78.181</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" onClick="addtext(8,'user')">user</td><td
+ id="tb" onClick="addtext(8,'user')">2010-4-16 16:04:33</td><td id="tb" 
+onclick="addtext(8,'user')">210.83.85.130</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" onClick="addtext(9,'user')">user</td><td
+ id="tb" onClick="addtext(9,'user')">2010-4-16 16:04:33</td><td id="tb" 
+onclick="addtext(9,'user')">210.83.85.130</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(10,'admin')">admin</td><td id="tb" 
+onclick="addtext(10,'admin')">2010-4-16 15:50:16</td><td id="tb" 
+onclick="addtext(10,'admin')">119.100.78.181</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(11,'admin')">admin</td><td id="tb" 
+onclick="addtext(11,'admin')">2010-4-16 15:50:16</td><td id="tb" 
+onclick="addtext(11,'admin')">119.100.78.181</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(12,'admin')">admin</td><td id="tb" 
+onclick="addtext(12,'admin')">2010-4-16 15:32:34</td><td id="tb" 
+onclick="addtext(12,'admin')">119.100.78.181</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(13,'admin')">admin</td><td id="tb" 
+onclick="addtext(13,'admin')">2010-4-16 15:32:34</td><td id="tb" 
+onclick="addtext(13,'admin')">119.100.78.181</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(14,'user')">user</td><td id="tb" 
+onclick="addtext(14,'user')">2010-4-16 15:28:16</td><td id="tb" 
+onclick="addtext(14,'user')">210.83.85.130</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(15,'user')">user</td><td id="tb" 
+onclick="addtext(15,'user')">2010-4-16 15:28:16</td><td id="tb" 
+onclick="addtext(15,'user')">210.83.85.130</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(16,'admin')">admin</td><td id="tb" 
+onclick="addtext(16,'admin')">2010-4-16 14:13:56</td><td id="tb" 
+onclick="addtext(16,'admin')">127.0.0.1</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(17,'admin')">admin</td><td id="tb" 
+onclick="addtext(17,'admin')">2010-4-16 14:13:55</td><td id="tb" 
+onclick="addtext(17,'admin')">127.0.0.1</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(18,'admin')">admin</td><td id="tb" 
+onclick="addtext(18,'admin')">2010-4-16 11:10:35</td><td id="tb" 
+onclick="addtext(18,'admin')">127.0.0.1</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(19,'admin')">admin</td><td id="tb" 
+onclick="addtext(19,'admin')">2010-4-16 11:10:34</td><td id="tb" 
+onclick="addtext(19,'admin')">127.0.0.1</td></tr><tr id="tr" 
+onmouseover="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+onclick="addtext(20,'admin')">admin</td><td id="tb" 
+onclick="addtext(20,'admin')">2010-4-16 8:20:56</td><td id="tb" 
+onclick="addtext(20,'admin')">127.0.0.1</td></tr></tbody></table><table 
+align="center" border="0" width="600px"><tbody><tr><th colspan="3" 
+align="left"> <font style="font-family: Webdings;">9 3</font> [1]  [<a 
+href="#" 
+onclick="document.form1.action='/lenobs/bsjxc/common/record.asp?page=2';document.form1.submit();">2</a>]
+  [<a href="#" 
+onclick="document.form1.action='/lenobs/bsjxc/common/record.asp?page=3';document.form1.submit();">3</a>]
+ <font style="font-family: Webdings;"><a href="#" 
+onclick="document.form1.action='/lenobs/bsjxc/common/record.asp?page=2';document.form1.submit();">4</a>
+ <a href="#" 
+onclick="document.form1.action='/lenobs/bsjxc/common/record.asp?page=3';document.form1.submit();">:</a></font>
+ [页次:1/3页] [共45条] [20条/页]
+<script>
+function tiaozhuan(){
+var yema=document.getElementById("yema").value
+document.form1.action='/lenobs/bsjxc/common/record.asp?page='+yema;
+document.form1.submit();
+}
+</script>
+ 转到第：<input id="yema" size="1" type="text">页<label class="button1"><input
+ value="GO" onClick="tiaozhuan()" type="button"></label> <label 
+class="button1"><input value="Excel" type="submit"></label></th></tr></tbody></table></form>
+</body></html>

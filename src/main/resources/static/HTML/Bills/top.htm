@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE></TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<SCRIPT language=javascript>
+function loginout(){
+window.parent.location.reload()
+}
+function tick() {
+   var today
+   today = new Date()
+   Clock.innerHTML = today.toLocaleString()
+   Clock2.innerHTML = TimeAdd(today.toGMTString(), CLD.TZ.value)
+   window.setTimeout("tick()", 1000);
+}
+function about(){
+window.open ('../System/gywm.htm', 'newwindow', 'height=250, width=330,top=200,left=250,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
+}
+</SCRIPT>
+
+<STYLE type=text/css>BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+#top {
+	BACKGROUND-POSITION: left 50%; FONT-SIZE: 12px; BACKGROUND-IMAGE: url(../images/top.jpg); OVERFLOW: hidden; WIDTH: 100%; COLOR: #f1f1f1; BACKGROUND-REPEAT: no-repeat; HEIGHT: 67px
+}
+#txt {
+	FONT-SIZE: 12px; COLOR: #fff
+}
+A:link {
+	FONT-SIZE: 12px; COLOR: #000; TEXT-DECORATION: none
+}
+A:visited {
+	FONT-SIZE: 12px; COLOR: #000; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-SIZE: 12px; COLOR: #000; TEXT-DECORATION: underline
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+</STYLE>
+
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY>
+<TABLE height=67 cellSpacing=0 cellPadding=0 width="100%" 
+background=../images/topbg1.jpg border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=146><IMG height=30 alt=德华进销存V1.0 
+            src="../images/top_logo.jpg" width=146></TD>
+          <TD>
+            <TABLE id=txt cellSpacing=0 cellPadding=0 width="50%" align=right 
+            border=0>
+              <TBODY>
+              <TR>
+                <TD><IMG height=19 src="../images/admin.gif" width=15></TD>
+                <TD>当前登录人：user</TD>
+                <TD><IMG height=16 src="../images/date.gif" width=18></TD>
+                <TD>今天：2010年4月15日<FONT id=Clock face=Arial color=#000080 
+                  size=4 align="center"></FONT>&nbsp;&nbsp;星期四</TD>
+                <TD><A onclick=about(); 
+                  href="#"><FONT 
+                  color=#ffffff>关于我们</FONT></A></TD>
+                <TD><IMG height=16 src="../images/exit.gif" width=15></TD>
+                <TD><A 
+                  href="../../index.htm" 
+                  target=_top><FONT 
+            color=#ffffff>退出</FONT></A></TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD height=35>&nbsp;</TD>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=0 width=870 align=left border=0>
+              <TBODY>
+              <TR>
+                <TD><A 
+                  href="main.htm" 
+                  target=main><IMG height=27 src="../images/top_4.jpg" 
+                  width=93></A></TD>
+                <TD><A 
+                  href="addbill.htm" 
+                  target=main><IMG height=27 src="../images/top_6.jpg" 
+                  width=93></A></TD>
+                <TD><A 
+                  href="../SFA/addbill.htm"
+                  target=main><IMG height=27 src="../images/top_10.jpg" 
+                  width=93></A></TD>
+                <TD><A 
+                  href="../ReportBill/depotcount.htm" 
+                  target=main><IMG height=27 src="../images/top_20.jpg" 
+                  width=93></A></TD>
+                <TD><A 
+                  href="../ReportBill/Viewdepot.htm"
+                  target=main><IMG height=27 src="../images/top_8.jpg" 
+                  width=93></A></TD>
+                <TD><A 
+                  href="../ReportBill/depotwarn.htm"
+                  target=main><IMG height=27 src="../images/top_12.jpg" 
+                  width=93></A></TD>
+                <TD><A 
+                  href="../DATABase/custom.htm"
+                  target=main><IMG height=27 src="../images/top_14.jpg" 
+                  width=93></A></TD>
+                <TD><A 
+                  href="../DATABase/goods.htm"
+                  target=main><IMG height=27 src="../images/top_16.jpg" 
+                  width=93></A></TD>
+                <TD><A   href="#"><IMG 
+                  height=27 src="../images/top_18.jpg" 
+              width=93></A></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>

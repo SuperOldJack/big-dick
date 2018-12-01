@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML><HEAD><TITLE></TITLE>
+<SCRIPT language=JavaScript src="../js/date.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/xmlhttp.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/order.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/showphoto.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/addrow.js"></SCRIPT>
+
+<SCRIPT>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   
+oTr.tag   =   true;
+}
+}
+
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+
+function addtext(i_row)
+{
+document.getElementById("temp").value=document.getElementById('tbl').rows[i_row].cells[0].innerHTML;
+}
+
+function GetDIV(oobj,val_i)
+{
+if (oobj == 'block')
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+else
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+ document.getElementById("search_suggest").style.display=oobj;
+ document.getElementById("temp1").value = document.getElementById('tbl').rows[val_i].cells[0].innerHTML;
+ document.getElementById("search_suggest").style.top=event.clientY+20+document.body.scrollTop;
+ document.getElementById("search_suggest").style.left=event.clientX+20+document.body.scrollLeft;
+}
+
+function CreateReturnValue(closeWindow,i){
+j=window.opener.document.all.sqd.rows.length;
+newRow=window.opener.document.all.sqd.insertRow(-1)
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML=j
+window.opener.document.getElementById("rowcount").value=j
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=delNumber type=radio >"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodscode"+j+" type=text class=INPUT1 id=goodscode"+j+" size=8 onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsname"+j+" type=text class=INPUT1 id=goodsname"+j+"  size=16  onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsunit"+j+" type=text class=INPUT1 id=goodsunit"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=units"+j+" type=text class=INPUT1 id=units"+j+"  size=3>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=price"+j+" type=text class=INPUT1 id=price"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=number"+j+" type=text class=INPUT1 id=number"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=money"+j+" type=text class=INPUT1 id=money"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=remark"+j+" type=text class=INPUT1 id=remark"+j+"  size=20><input name=aveprice"+j+" type=hidden class=INPUT1 id=aveprice"+j+"  size=20><input name=fact_num"+j+" type=hidden id=fact_number"+j+">"
+var goodscode=window.opener.document.getElementById("goodscode"+j);
+var goodsname=window.opener.document.getElementById("goodsname"+j);
+var goodsunit=window.opener.document.getElementById("goodsunit"+j);
+var units=window.opener.document.getElementById("units"+j);
+var remark=window.opener.document.getElementById("remark"+j);
+var number=window.opener.document.getElementById("number"+j);
+var price=window.opener.document.getElementById("price"+j);
+var aveprice=window.opener.document.getElementById("aveprice"+j);
+var fact_num=window.opener.document.getElementById("fact_num"+j);
+goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+goodsunit.value=document.getElementById('tbl').rows[i].cells[2].innerText;
+units.value=document.getElementById('tbl').rows[i].cells[3].innerText;
+remark.value=document.getElementById('tbl').rows[i].cells[6].innerText;
+aveprice.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+fact_num.value=document.getElementById('tbl').rows[i].cells[7].innerText;	 
+number.value=1;
+if (""=="XS")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+}
+else if (""=="XD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+} 
+else if (""=="CG")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="CD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if (""=="in")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 	 
+else
+{
+price.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+}
+//document.getElementById('tbl').deleteRow(i);
+document.getElementById('tbl').rows[i].style.display="none";
+}
+</SCRIPT>
+
+<META http-equiv=Content-Type content="text/html; charset=gb2312"><LINK 
+href="../css/style.css" type=text/css rel=stylesheet>
+<META http-equiv=Pragma content=no-cache>
+<SCRIPT language=JavaScript src="../js/jquery.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/addrow.js"></SCRIPT>
+
+<SCRIPT>
+function bar(){
+  if ((event.keyCode == 13) && ($("#barcode").val()!="")){
+	addrow_bar();
+    $.post("barcode.asp",{date:escape($("#date").val()),barcode:escape($("#barcode").val()),depot:escape($("#depot").val())},
+	function(data)
+	{ 
+	   i=$("#rowcount").val();
+	   str=data.split("|");
+	   $("#goodscode"+i).val(str[0]);
+	   $("#goodsname"+i).val(str[1]);
+	   $("#goodsunit"+i).val(str[2]);
+	   $("#units"+i).val(str[3]);
+	   $("#number"+i).val("1");
+	   $("#aveprice"+i).val(str[8]);
+	   $("#fact_num"+i).val(str[7]);
+	   $("#remark"+i).val(str[6]);
+	   
+	     $("#price"+i).val(str[4]);
+	   
+	}
+	);
+	$("#barcode").val("");
+  }
+}
+function check(){
+if (document.sample.cust.value=="")
+{
+alert("请选择往来单位！");
+document.sample.cust.focus();
+return false;
+}
+if (document.sample.rowcount.value == "")
+{
+alert("请添加货品！");
+return false;
+}
+}
+function edit_row(i)
+{
+	window.open ('#', 'newwindow', 'top=100,left=150,height=600, width=800,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
+}
+function count(i){
+r_price=Number(document.getElementById("price"+i).value);
+r_number=Number(document.getElementById("number"+i).value);
+document.getElementById("money"+i).value=(r_price*r_number).toFixed(2);
+}
+var j=0
+function add_row(){
+    //addrow();
+	window.open ('../System/selectgoods.htm', 'newwindow', 'top=100,left=150,height=600, width=800,toolbar=no,menubar=no, scrollbars=yes, resizable=no,location=no, status=no')
+}
+function del_row() {
+    if(sqd.rows.length==1) return;
+    var checkit = false
+    for (var i=0;i<document.all.delNumber.length;i++) {
+            if (document.all.delNumber[i].checked) {
+            checkit=true;
+            sqd.deleteRow(i+1)
+            break;
+            }
+    }
+    if (checkit) {
+        for(i=1;i<sqd.rows.length;i++){
+        sqd.rows[i].cells[0].innerText=i
+		document.getElementById("rowcount").value=sqd.rows.length-1
+        }
+
+    } else
+    {
+    alert("请选择一个要删除的对象");
+    return false}
+}
+</SCRIPT>
+
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY>
+<TABLE align=center border=0>
+  <TBODY>
+  <TR>
+    <TD><BR>
+      <FORM onKeyPress="if(event.keyCode==13){return false;}" name=sample 
+       method=post>
+      <DIV align=center><SPAN class=style1>采购订单</SPAN></DIV>
+      <DIV align=center><SPAN 
+      class=style1>CD-2010-04-15-0001</SPAN></DIV><BR><INPUT type=hidden 
+      value=CD-2010-04-15-0001 name=billcode> <INPUT type=hidden value=False 
+      name=_check> 
+      <TABLE id=tbl style="FONT-SIZE: 12px" cellSpacing=0 
+      borderColorDark=#ffffff cellPadding=2 width=780 align=center 
+      bgColor=#ffffee borderColorLight=#000000 border=1>
+        <TBODY>
+        <TR>
+          <TD align=right width=70>制单日期：</TD>
+          <TD width=320><INPUT id=date readOnly size=16 value=2010-4-15 
+            name=date><INPUT style="CURSOR: hand" 
+            onclick="setDay(date);return false;" type=image height=16 width=18 
+            src="../images/date.gif"><FONT color=red>*</FONT></TD>
+          <TD align=right width=70>供&nbsp;应&nbsp;商：</TD>
+          <TD width=320><INPUT size=16 value=asdf name=Cust><A 
+            onclick="JavaScript:window.open ('../System/selectcust.htm', 'newwindow', 'height=600, width=800,top=100,left=150, toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no, status=no')" 
+            href="#"><IMG 
+            height=17 src="../images/choose.gif" width=21 
+            border=0></A><FONT color=red>*</FONT> </TD></TR>
+        <TR>
+          <TD align=right>仓&nbsp;&nbsp;&nbsp;&nbsp;库： </TD>
+          <TD><SELECT id=depot name=depot><OPTION value=库房 
+              selected>库房</OPTION></SELECT><FONT color=red>*</FONT></TD>
+          <TD align=right>制&nbsp;单&nbsp;人：</TD>
+          <TD><INPUT readOnly type=maker size=16 value=user><FONT 
+            color=red>*</FONT></TD></TR>
+        <TR>
+          <TD align=right>备&nbsp;&nbsp;&nbsp;&nbsp;注：</TD>
+          <TD><INPUT size=30 name=memo></TD>
+          <TD align=right>经&nbsp;办&nbsp;人：</TD>
+          <TD><SELECT name=user></SELECT><FONT color=red>*</FONT></TD>
+        <TR>
+          <TD align=right>预&nbsp;付&nbsp;款：</TD>
+          <TD><INPUT size=30 value=0 name=pay></TD>
+          <TD align=right>帐&nbsp;&nbsp;&nbsp;&nbsp;户：</TD>
+          <TD><SELECT name=account><OPTION value="" selected></OPTION> 
+              <OPTION value=工商银行>工商银行</OPTION><OPTION 
+              value=农业银行>农业银行</OPTION><OPTION 
+        value=111>111</OPTION></SELECT></TD></TR></TR></TBODY></TABLE>
+      <DIV class=but_mar align=left><INPUT class=button onclick=add_row() type=button value=" 添 加 " name=add> 
+<INPUT class=button onclick=del_row() type=button value=" 删 除 " name=del> 
+      &nbsp;&nbsp;条码录入框：<INPUT id=barcode onkeyup=bar(); size=16 
+      name=barcode></DIV>
+      <TABLE id=sqd style="FONT-SIZE: 12px" cellSpacing=0 
+      borderColorDark=#ffffff cellPadding=2 width=780 align=center 
+      bgColor=#ffffee borderColorLight=#000000 border=1>
+        <TBODY>
+        <TR align=middle>
+          <TH width="3%">&nbsp;</TH>
+          <TH width="5%">删除</TH>
+          <TH width="10%">商品编码</TH>
+          <TH width="15%">商品名称</TH>
+          <TH width="10%">商品规格</TH>
+          <TH width="7%">单位</TH>
+          <TH width="10%">单价</TH>
+          <TH width="10%">数量</TH>
+          <TH width="10%">金额</TH>
+          <TH width="20%">备注</TH></TR><INPUT id=rowcount type=hidden value=0 
+        name=rowcount> </TBODY></TABLE>
+      <DIV class=but_mar align=center><INPUT class=button onClick="return check();" type=submit value=" 保 存 " name=B1></DIV></FORM></TD></TR></TBODY></TABLE></BODY></HTML>

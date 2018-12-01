@@ -1,0 +1,100 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=GB2312">
+
+
+
+
+<title>
+往来单位
+</title>
+	<link rel="StyleSheet" 
+href="../css/dtree.css"
+ type="text/css">
+    <link rel="stylesheet" 
+href="../css/style.css"
+ type="text/css">
+	<script type="text/javascript" src="../js/dtree.js"></script>
+	<script>
+	function CreateReturnValue()
+	{
+	document.getElementById('name1').value=document.getElementById('name').value;
+	document.getElementById('name2').value=document.getElementById('name').value;
+	document.getElementById('name3').value=document.getElementById('name').value;
+	}
+	function checkvalue()
+	{
+	  if (document.getElementById('pid').value=="")
+	  {
+	    alert("请选择节点！"); 
+		return false;
+	  }
+	  if (document.getElementById('name').value=="") 
+	  {
+	    alert("请输入节点的名称！");
+		return false;
+	  }
+	}
+	</script>
+</head><body bgcolor="#d6d3ce">
+<table border="0" width="100%">
+<tbody><tr valign="top"><td align="left" width="24%">
+<div class="dtree">
+	<script type="text/javascript">
+		<!--
+
+		d = new dTree('d');
+		d.add(0,-1,'往来单位分类','#');d.add(70,0,'客户','#');d.add(71,0,'供应商','#');
+
+document.write(d);
+
+//-->
+</script><div class="dtree">
+<!--<div class="dTreeNode"><img id="id0" 
+src="../images/base.gif"
+ alt=""><a id="sd0" class="node" 
+href="#"
+ onclick="javascript: d.s(0);">往来单位分类</a></div><div id="dd0" 
+class="clip" style="display: block;"><div class="dTreeNode"><img 
+src="../images/join.gif"
+ alt=""><img id="id1" 
+src="../images/page.gif"
+ alt=""><a id="sd1" class="node" 
+href="#"
+ onclick="javascript: d.s(1);">客户</a></div><div class="dTreeNode"><img 
+src="../images/joinbottom.gif"
+ alt=""><img id="id2" 
+src="../images/page.gif"
+ alt=""><a id="sd2" class="node" 
+href="#"
+ onclick="javascript: d.s(2);">供应商</a></div></div></div>
+</div>-->
+</td>
+<td width="76%">
+<input name="pid" value="" type="hidden">
+<input name="name" onpropertychange="CreateReturnValue()" type="text"><br>
+<form name="addtree1" method="post" onSubmit="return checkvalue();" 
+>
+<input name="name1" id="name1" type="hidden">
+<input name="code1" id="code1" type="hidden">
+<input value="添加下级" class="button" type="submit">
+</form>
+<form name="addtree2" method="post" onSubmit="return checkvalue();" 
+>
+<input name="name2" id="name2" type="hidden">
+<input name="code2" id="code2" type="hidden">
+<input value="增加同级" class="button" type="submit">
+</form>
+<form name="edittree" method="post" onSubmit="return checkvalue();" 
+>
+<input name="name3" id="name3" type="hidden">
+<input name="code3" id="code3" type="hidden">
+<input value="编辑节点" class="button" type="submit">
+</form>
+<form name="deltree" method="post" 
+>
+<input value="删&nbsp;&nbsp;&nbsp;&nbsp;除" class="button" type="button">
+</form>
+</td>
+</tr>
+</tbody></table>
+</body></html>

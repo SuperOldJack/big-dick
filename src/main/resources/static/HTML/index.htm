@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>进销存管理系统</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<STYLE type=text/css>.style1 {
+	FONT-SIZE: 12px
+}
+A:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A:visited {
+	TEXT-DECORATION: none
+}
+A:hover {
+	TEXT-DECORATION: none
+}
+A:active {
+	TEXT-DECORATION: none
+}
+.coolscrollbar {
+	SCROLLBAR-ARROW-COLOR: yellow; SCROLLBAR-BASE-COLOR: #73a2d6
+}
+</STYLE>
+
+<SCRIPT language=javascript>
+window.status = "当前用户：user";
+<!--
+function switchSysBar(){
+if (switchPoint.innerText==3){
+switchPoint.innerText=4
+document.all("frmTitle").style.display="none"
+}else{
+switchPoint.innerText=3
+document.all("frmTitle").style.display=""
+}}
+  
+function locking(){   
+	document.all.ly.style.display="block";   
+	document.all.ly.style.width=document.body.clientWidth;   
+	document.all.ly.style.height=document.body.clientHeight;   
+	document.all.Layer2.style.display='block';  
+}   
+function Lock_CheckForm(theForm){   
+	document.all.ly.style.display='none';document.all.Layer2.style.display='none';
+	return false;   
+} 
+  function ope(ur){
+	 window.open(ur,"main");  
+  }
+//-->
+</SCRIPT>
+
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY 
+style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px" 
+scroll=no onload=locking();>
+<!--<DIV id=ly 
+style="DISPLAY: none; Z-INDEX: 2; FILTER: alpha(opacity=60); LEFT: 0px; POSITION: absolute; TOP: 0px; BACKGROUND-COLOR: #777"></DIV>浮层框架开始-->
+<!--<DIV class=coolscrollbar id=Layer2 
+style="OVERFLOW-Y: auto; DISPLAY: none; Z-INDEX: 3; ; LEFT: expression((document.body.offsetWidth-540)/2); OVERFLOW-X: hidden; WIDTH: 600px; POSITION: absolute; ; TOP: expression((document.body.offsetHeight-170)/3); HEIGHT: 400px; BACKGROUND-COLOR: #fff" 
+align=center>
+<TABLE 
+style="BORDER-RIGHT: #e7e3e7 0px solid; BORDER-TOP: #e7e3e7 0px solid; BORDER-LEFT: #e7e3e7 0px solid; BORDER-BOTTOM: #e7e3e7 0px solid; BORDER-COLLAPSE: collapse" 
+height=400 cellSpacing=0 cellPadding=0 width=600 border=0>
+  <TBODY>
+  <TR>
+    <TD 
+    style="PADDING-LEFT: 4px; FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #fff; PADDING-TOP: 2px; BACKGROUND-COLOR: #73a2d6" 
+    vAlign=center height=10>
+      <DIV align=right><A class=style1 onclick=Lock_CheckForm(this); 
+      href="javascript:;">[关闭]</A>&nbsp;&nbsp;&nbsp;</DIV></TD></TR>
+  <TR style="MARGIN-LEFT: 50px">
+    <TD align=left>
+      <H3 align=center>请勿随便给予他人：</H3>
+      <HR align=center width="50%" color=#73a2d6>
+<PRE style="MARGIN-LEFT: 50px">模版做之不易，请勿随便给予他人<BR><BR><BR><BR><BR><BR><PRE>
+	  </PRE></PRE></TD></TR></TBODY></TABLE></DIV>-->
+<TABLE height="100%" cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD vAlign=top colSpan=3 height=67><IFRAME 
+      style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 100%; PADDING-TOP: 0px; HEIGHT: 67px" 
+      name=top marginWidth=0 marginHeight=0 
+      src="Bills/top.htm" frameBorder=0 noResize 
+      scrolling=no bordercolor="threedface"></IFRAME></TD></TR>
+  <TR>
+    <TD id=frmTitle align=middle width=150 height="100%"><IFRAME id=BoardLeft  scrolling="no"
+      style="WIDTH: 150px; HEIGHT: 100%" name=BoardLeft marginWidth=0 
+      marginHeight=0 src="Bills/left.htm" scrolling="no"
+      frameBorder=0 noResize></IFRAME></TD>
+    <TD style="HEIGHT: 100%" onclick=switchSysBar() align=middle width=3 
+    background=images/3bg.jpg 
+      bgColor=#d8ecff><FONT 
+      style="FONT-SIZE: 9px; CURSOR: hand; COLOR: #000000; FONT-FAMILY: Webdings"><SPAN 
+      id=switchPoint>3</SPAN></FONT></TD>
+    <TD height="100%"><IFRAME id=main style="WIDTH: 100%; HEIGHT: 100%"  scrolling="no"
+      name=main marginHeight=0 src="Bills/main.htm" 
+      frameBorder=0></IFRAME></TD></TR></TBODY></TABLE></BODY></HTML>

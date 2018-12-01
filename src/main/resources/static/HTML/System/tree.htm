@@ -1,0 +1,59 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=GB2312">
+
+
+<title>
+往来单位分类
+</title>
+<link rel="StyleSheet" href="../css/dtree.css" type="text/css">
+<script type="text/javascript" src="../js/dtree.js"></script>
+<script>
+function CreateReturnValue(closeWindow)
+{
+	var nodecode=window.opener.document.getElementById("nodename");
+	var typecode=window.opener.document.getElementById("typecode");
+	//var goodstype=window.opener.document.getElementById("goodstype");
+	nodecode.value=document.getElementById('tree').value; 
+	typecode.value=document.getElementById('code').value; 
+	//goodstype.value=document.getElementById('tree').value; 
+	window.close();
+	if (closeWindow==true)
+	{
+	    alert("1");
+		//window.opener=null;
+		window.close();
+	}
+}
+</script>
+</head><body>
+
+<input name="tree" id="tree" value="" type="hidden">
+<input name="code" id="code" value="" type="hidden">
+<div class="dtree">
+	<p><a href="javascript:%20d.openAll();">全部展开</a> | <a 
+href="javascript:%20d.closeAll();">全部收起</a></p>
+
+	<script type="text/javascript">
+		<!--
+
+		d = new dTree('d');
+		d.add(0,-1,'往来单位分类','#');d.add(70,0,'客户','#');d.add(71,0,'供应商','#');
+
+document.write(d);
+
+//-->
+</script><div class="dtree">
+<!--<div class="dTreeNode"><img id="id0" src="tree_files/base.gif" alt=""><a
+ id="sd0" class="node" href="#" onClick="javascript: d.s(0);">往来单位分类</a></div><div
+ id="dd0" class="clip" style="display: block;"><div class="dTreeNode"><img
+ src="tree_files/join.gif" alt=""><img id="id1" 
+src="tree_files/page.gif" alt=""><a id="sd1" class="node" 
+href="http://download.lenosoft.net/lenobs/bsjxc/common/tree.asp?type=cust&amp;name=%BF%CD%BB%A7&amp;code=02"
+ onclick="javascript: d.s(1);">客户</a></div><div class="dTreeNode"><img 
+src="tree_files/joinbottom.gif" alt=""><img id="id2" 
+src="tree_files/page.gif" alt=""><a id="sd2" class="node" 
+href="http://download.lenosoft.net/lenobs/bsjxc/common/tree.asp?type=cust&amp;name=%B9%A9%D3%A6%C9%CC&amp;code=03"
+ onclick="javascript: d.s(2);">供应商</a></div></div></div>
+</div>
+-->
+</body></html>

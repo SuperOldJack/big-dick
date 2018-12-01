@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>订单浏览</TITLE>
+<SCRIPT language=JavaScript src="../js/date.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/xmlhttp.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/order.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/showphoto.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/addrow.js"></SCRIPT>
+
+<SCRIPT>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   
+oTr.tag   =   true;
+}
+}
+
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+
+function addtext(i_row)
+{
+document.getElementById("temp").value=document.getElementById('tbl').rows[i_row].cells[0].innerHTML;
+}
+
+function GetDIV(oobj,val_i)
+{
+if (oobj == 'block')
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+else
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+ document.getElementById("search_suggest").style.display=oobj;
+ document.getElementById("temp1").value = document.getElementById('tbl').rows[val_i].cells[0].innerHTML;
+ document.getElementById("search_suggest").style.top=event.clientY+20+document.body.scrollTop;
+ document.getElementById("search_suggest").style.left=event.clientX+20+document.body.scrollLeft;
+}
+
+function CreateReturnValue(closeWindow,i){
+j=window.opener.document.all.sqd.rows.length;
+newRow=window.opener.document.all.sqd.insertRow(-1)
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML=j
+window.opener.document.getElementById("rowcount").value=j
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=delNumber type=radio >"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodscode"+j+" type=text class=INPUT1 id=goodscode"+j+" size=8 onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsname"+j+" type=text class=INPUT1 id=goodsname"+j+"  size=16  onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsunit"+j+" type=text class=INPUT1 id=goodsunit"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=units"+j+" type=text class=INPUT1 id=units"+j+"  size=3>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=price"+j+" type=text class=INPUT1 id=price"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=number"+j+" type=text class=INPUT1 id=number"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=money"+j+" type=text class=INPUT1 id=money"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=remark"+j+" type=text class=INPUT1 id=remark"+j+"  size=20><input name=aveprice"+j+" type=hidden class=INPUT1 id=aveprice"+j+"  size=20><input name=fact_num"+j+" type=hidden id=fact_number"+j+">"
+var goodscode=window.opener.document.getElementById("goodscode"+j);
+var goodsname=window.opener.document.getElementById("goodsname"+j);
+var goodsunit=window.opener.document.getElementById("goodsunit"+j);
+var units=window.opener.document.getElementById("units"+j);
+var remark=window.opener.document.getElementById("remark"+j);
+var number=window.opener.document.getElementById("number"+j);
+var price=window.opener.document.getElementById("price"+j);
+var aveprice=window.opener.document.getElementById("aveprice"+j);
+var fact_num=window.opener.document.getElementById("fact_num"+j);
+goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+goodsunit.value=document.getElementById('tbl').rows[i].cells[2].innerText;
+units.value=document.getElementById('tbl').rows[i].cells[3].innerText;
+remark.value=document.getElementById('tbl').rows[i].cells[6].innerText;
+aveprice.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+fact_num.value=document.getElementById('tbl').rows[i].cells[7].innerText;	 
+number.value=1;
+if ("CG"=="XS")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+}
+else if ("CG"=="XD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+} 
+else if ("CG"=="CG")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if ("CG"=="CD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if ("CG"=="in")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 	 
+else
+{
+price.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+}
+//document.getElementById('tbl').deleteRow(i);
+document.getElementById('tbl').rows[i].style.display="none";
+}
+</SCRIPT>
+
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<STYLE type=text/css>.style2 {
+	FONT-SIZE: 12px
+}
+A:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A:visited {
+	TEXT-DECORATION: none
+}
+A:hover {
+	TEXT-DECORATION: none
+}
+A:active {
+	TEXT-DECORATION: none
+}
+.coolscrollbar {
+	SCROLLBAR-ARROW-COLOR: yellow; SCROLLBAR-BASE-COLOR: #73a2d6
+}
+#note {
+	PADDING-RIGHT: 20px; DISPLAY: none; PADDING-LEFT: 20px; Z-INDEX: 100001; BACKGROUND: url(../img/notebg.png) no-repeat; LEFT: 40%; PADDING-BOTTOM: 20px; WIDTH: 200px; PADDING-TOP: 20px; POSITION: absolute; HEIGHT: 100px
+}
+</STYLE>
+<LINK href="../css/style.css" type=text/css rel=stylesheet>
+<SCRIPT language=JavaScript src="../js/xmlHttp_selectplan.js"></SCRIPT>
+
+<SCRIPT language=JavaScript src="../js/jquery.js"></SCRIPT>
+
+<SCRIPT language=javascript src=""></SCRIPT>
+
+<SCRIPT language=javascript src=""></SCRIPT>
+
+<SCRIPT>
+function out(){
+$("#note").css({display:"none",top:"100px"});
+};
+$(function(){
+$("#btn1").click(function(){
+if(!$("#note").is(':visible')){
+$("#note").css({display:"block",top:"100px"});
+}
+});
+});
+function del(str){
+if(!confirm('确定要删除'+str+'这张单据吗?')){
+  return false
+  }else{
+window.open('#','main');
+}
+}
+function edit(str){
+window.open('#','main');
+}
+function checkbill(type,billcode){
+window.location.href="#"
+}
+function uncheckbill(type,billcode){
+window.location.href="#"
+}
+</SCRIPT>
+
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY padding:0px;margin:0px;??><BR>
+<DIV class=STYLE1 align=center>采购订单查询</DIV>
+<FORM name=form1  method=post>
+<DIV id=note style="WIDTH: 300px; HEIGHT: 250px">
+<TABLE 
+style="BORDER-RIGHT: #e7e3e7 0px solid; BORDER-TOP: #e7e3e7 0px solid; BORDER-LEFT: #e7e3e7 0px solid; BORDER-BOTTOM: #e7e3e7 0px solid; BORDER-COLLAPSE: collapse" 
+cellSpacing=0 cellPadding=0 width=220 border=0>
+  <TBODY>
+  <TR>
+    <TD width="30%">单&nbsp;&nbsp;&nbsp;&nbsp;号：</TD>
+    <TD><INPUT size=16 name=billcode></TD></TR>
+  <TR>
+    <TD>制&nbsp;单&nbsp;人：</TD>
+    <TD><INPUT size=16 name=maker></TD></TR>
+  <TR>
+    <TD>经&nbsp;办&nbsp;人：</TD>
+    <TD><INPUT size=16 name=user></TD></TR>
+  <TR>
+    <TD>审核状态：</TD>
+    <TD><SELECT name=check><OPTION value="" selected></OPTION> <OPTION 
+        value=True>审核</OPTION> <OPTION value=False>未审核</OPTION></SELECT></TD></TR>
+  <TR>
+    <TD align=middle colSpan=2><INPUT class=button type=submit value=&nbsp;查&nbsp;询&nbsp;> <INPUT class=button id=_close type=button value=&nbsp;关&nbsp;闭&nbsp;></TD></TR></TBODY></TABLE></DIV>
+<TABLE align=center>
+  <TBODY>
+  <TR>
+    <TD width=50>从日期：</TD>
+    <TD width=150><INPUT size=16 value=2010-4-1 name=date1><INPUT 
+      style="CURSOR: hand" onClick="setDay(date1);return false;" type=image 
+      height=16 width=18 src="../images/date.gif"></LABEL></TD>
+    <TD width=50>到日期：</TD>
+    <TD width=150><INPUT size=16 value=2010-4-15 name=date2><INPUT 
+      style="CURSOR: hand" onClick="setDay(date2);return false;" type=image 
+      height=16 width=18 src="../images/date.gif"></TD>
+    <TD rowSpan=2><INPUT class=button type=submit value=" 查 找 "> <INPUT class=button id=btn1 type=button value=更多条件></TD></TR>
+  <TR>
+    <TD width=50>供应商：</TD>
+    <TD colSpan=3><INPUT id=cust size=45 name=custname><A 
+      onclick="JavaScript:window.open ('../System/selectcust.htm', 'selectcust', 'height=600, width=800,top=100,left=150, toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no, status=no')" 
+      href="#"><img 
+      height=17 src="../images/choose.gif" width=21 
+  border=0></A></TD></TR></TBODY></TABLE></FORM><INPUT type=hidden name=temp> 
+<INPUT id=temp1 onpropertychange=change_key() type=hidden name=temp1> 
+<TABLE id=tbl style="WORD-BREAK: break-all" cellSpacing=0 cellPadding=3 
+width=850 align=center border=0 empty-cells:show>
+  <TBODY>
+  <TR 
+  style="BORDER-BOTTOM: black 2px solid; HEIGHT: 25px; BACKGROUND-COLOR: #999999" 
+  align=middle bgColor=#ffffff>
+    <TH width=120 bgColor=#c5cdd1>单 号</TH>
+    <TH width=80 bgColor=#c5cdd1>制单日期</TH>
+    <TH width=200 bgColor=#c5cdd1>供应商/客户</TH>
+    <TH width=100 bgColor=#c5cdd1>经办人</TH>
+    <TH width=80 bgColor=#c5cdd1>审核状态</TH>
+    <TH width=200 bgColor=#c5cdd1>操作</TH></TR>
+  <TR id=tr onMouseOver="GetDIV('block',1)" onMouseOut="GetDIV('none',1)" 
+  align=middle bgColor=#ffffff>
+    <TD onmousemove=addtext(1)>CD-2010-04-15-0001</TD>
+    <TD onmousemove=addtext(1)>2010-4-15</TD>
+    <TD onmousemove=addtext(1)>asdf</TD>
+    <TD onmousemove=addtext(1)></TD>
+    <TD onmousemove=addtext(1)>未审核 </TD>
+    <TD><INPUT class=button onClick="checkbill('CG','CD-2010-04-15-0001');" type=button value=审核> 
+<INPUT class=button onClick="uncheckbill('CG','CD-2010-04-15-0001');" type=button value=反审> 
+<INPUT class=button onClick="edit('CD-2010-04-15-0001');" type=button value=修改> 
+<INPUT class=button onClick="del('CD-2010-04-15-0001');" type=button value=删除></TD></TR></TBODY></TABLE>
+<TABLE width=850 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH align=left colSpan=6><FONT style="FONT-FAMILY: Webdings">9 3</FONT> 
+      [1] <FONT style="FONT-FAMILY: Webdings">4 :</FONT> [页次:1/1页] [共1条] [20条/页]
+      <SCRIPT>
+function tiaozhuan(){
+var yema=document.getElementById("yema").value
+document.form1.action='/lenobs/bsjxc/Bills/selectplan.asp?type=CG&page='+yema;
+document.form1.submit();
+}
+</SCRIPT>
+       转到第：<INPUT id=yema size=1>页<LABEL class=button1><INPUT onclick=tiaozhuan() type=button value=GO></LABEL> 
+  </TH></TR></TBODY></TABLE></FORM>
+<DIV class=billdetail id=search_suggest 
+style="DISPLAY: none; POSITION: absolute"></DIV></BODY></HTML>

@@ -1,0 +1,476 @@
+<html><head>
+
+<script language="JavaScript" src="../js/date.js"></script>
+<script language="JavaScript" src="../js/xmlhttp.js"></script>
+<script language="JavaScript" src="../js/order.js"></script>
+<script language="JavaScript" src="../js/showphoto.js"></script><script language="JavaScript" src="../js/addrow.js"></script><script language="JavaScript" src="../js/jquery.js"></script><script>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   
+oTr.tag   =   true;
+}
+}
+
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+
+function addtext(i_row,str)
+{
+document.getElementById("temp").value=str;
+}
+
+function GetDIV(oobj,val_i,str)
+{
+if (oobj == 'block')
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+else
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+ document.getElementById("search_suggest").style.display=oobj;
+ document.getElementById("temp1").value = str;
+ document.getElementById("search_suggest").style.top=event.clientY+20+document.body.scrollTop;
+ document.getElementById("search_suggest").style.left=event.clientX+20+document.body.scrollLeft;
+}
+
+function CreateReturnValue(closeWindow,i){
+j=window.opener.document.all.sqd.rows.length;
+newRow=window.opener.document.all.sqd.insertRow(-1)
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML=j
+window.opener.document.getElementById("rowcount").value=j
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=delNumber type=radio >"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodscode"+j+" type=text class=INPUT1 id=goodscode"+j+" size=8 onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsname"+j+" type=text class=INPUT1 id=goodsname"+j+"  size=16  onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsunit"+j+" type=text class=INPUT1 id=goodsunit"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=units"+j+" type=text class=INPUT1 id=units"+j+"  size=3>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=price"+j+" type=text class=INPUT1 id=price"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=number"+j+" type=text class=INPUT1 id=number"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=money"+j+" type=text class=INPUT1 id=money"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=remark"+j+" type=text class=INPUT1 id=remark"+j+"  size=20><input name=aveprice"+j+" type=hidden class=INPUT1 id=aveprice"+j+"  size=20><input name=fact_num"+j+" type=hidden id=fact_number"+j+">"
+var goodscode=window.opener.document.getElementById("goodscode"+j);
+var goodsname=window.opener.document.getElementById("goodsname"+j);
+var goodsunit=window.opener.document.getElementById("goodsunit"+j);
+var units=window.opener.document.getElementById("units"+j);
+var remark=window.opener.document.getElementById("remark"+j);
+var number=window.opener.document.getElementById("number"+j);
+var price=window.opener.document.getElementById("price"+j);
+var aveprice=window.opener.document.getElementById("aveprice"+j);
+var fact_num=window.opener.document.getElementById("fact_num"+j);
+goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+goodsunit.value=document.getElementById('tbl').rows[i].cells[2].innerText;
+units.value=document.getElementById('tbl').rows[i].cells[3].innerText;
+remark.value=document.getElementById('tbl').rows[i].cells[6].innerText;
+aveprice.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+fact_num.value=document.getElementById('tbl').rows[i].cells[7].innerText;	 
+number.value=1;
+if ("CG"=="XS")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+}
+else if ("CG"=="XD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+} 
+else if ("CG"=="CG")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if ("CG"=="CD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if ("CG"=="in")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 	 
+else
+{
+price.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+}
+//document.getElementById('tbl').deleteRow(i);
+document.getElementById('tbl').rows[i].style.display="none";
+}
+</script><meta 
+http-equiv="Content-Type" content="text/html; charset=GB2312"><link 
+rel="stylesheet" href="../css/style.css" type="text/css"><script language="JavaScript" src="../js/jquery.js"></script><script language="javascript" type="text/javascript">
+$(document).ready(function() {
+	$("#nodename").change(function() {
+		if ($("#nodename").val()==""){
+		$("#typecode").attr("value","");
+		}
+	});
+});
+function setHiddenCol(oTable,iCol)
+{
+    for (i=0;i < oTable.rows.length ; i++)
+    {
+        oTable.rows[i].cells[iCol].style.display = oTable.rows[i].cells[iCol].style.display=="none"?"block":"none";
+		oTable.rows[i].cells[4].style.display = oTable.rows[i].cells[4].style.display=="none"?"block":"none";
+    }
+}
+
+
+</script><title>选择商品</title></head><body topmargin="0" 
+onload="setHiddenCol(tbl,8)"><span id="hintdiv" style="display: none; 
+position: absolute; z-index: 500;"></span>
+
+
+
+
+
+
+
+
+
+
+
+
+<table border="0">
+<form name="form1" method="post" 
+></form>
+<tbody><tr>
+  <td id="td">货品编码</td>
+  <td id="td"><input name="s_goodscode" size="16" type="text">&nbsp;&nbsp;</td>
+  <td id="td">货品名称</td>
+  <td id="td"><input name="s_goodsname" size="16" type="text">&nbsp;&nbsp;</td>
+  <td>货品分类:</td>
+  <td><LABEL><input name="nodename" id="nodename" size="16" type="text"><A 
+      onclick="window.open ('../System/edittree2.htm', 'newwindow1', 'height=400, width=200,toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no, status=no')" 
+      href="#"><IMG 
+      height=17 src="../images/choose.gif" width=21 border=0></A></LABEL><input name="typecode" id="typecode" value=""
+ type="hidden"></td>
+  <td id="td"><input name="select" value=" 查 询 " class="button" 
+type="submit"></td>
+</tr>
+
+</tbody></table>
+<hr>
+<input name="temp" id="temp" type="hidden"><form name="excel" 
+method="post" target="_blank" action="../inc/excel.asp"><input 
+name="table" value="SelectGoods" type="hidden"><input name="sql" 
+value="select 
+s1.goodscode,goodsname,goodsunit,units,inprice,outprice,remark,t_num,avgprice
+ from (select 
+goodscode,goodsname,goodsunit,units,inprice,outprice,remark from t_goods
+ where 1=1 ) as s1 left join (select goodscode,sum(number*flag) as t_num
+ 
+,iif(round(sum(number*flag),9)=0,0,round(round(sum(inprice*number*flag),9)/round(sum(number*flag),9),9))
+ as avgprice from s_count where adddate&lt;=#2010-4-18#  and depotname =
+ '库房' group by goodscode) as s2 on s1.goodscode = s2.goodscode" 
+type="hidden"><table id="tbl" onClick="sortColumn(event)" align="center"
+ border="0" width="750px"><thead><tr align="center"><th 
+type="CaseInsensitiveString" style="cursor: pointer;" width="70px">货品编码</th><th
+ type="CaseInsensitiveString" style="cursor: pointer;" width="130px">货品名
+称</th><th type="CaseInsensitiveString" style="cursor: pointer;" 
+width="100px">货品规格</th><th type="CaseInsensitiveString" style="cursor: 
+pointer;" width="30px">单位</th><th type="Number" style="cursor: pointer; 
+display: none;" width="70px">入库价</th><th type="Number" style="cursor: 
+pointer;" width="70px">销售价</th><th type="CaseInsensitiveString" 
+style="cursor: pointer;" width="140px">备注</th><th type="Number" 
+style="cursor: pointer;" width="70px">库存数量</th><th type="Number" 
+style="cursor: pointer; display: none;" width="70px">成本价</th></tr></thead><tbody><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,1)">00010</td><td id="tb" 
+ondblclick="CreateReturnValue(true,1)">新富力卡脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,1)">灰色</td><td id="tb" 
+ondblclick="CreateReturnValue(true,1)">套</td><td style="display: none;" 
+id="tb" onDblClick="CreateReturnValue(true,1)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,1)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,1)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,1)">1.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,1)">10.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,2)">00011</td><td id="tb" 
+ondblclick="CreateReturnValue(true,2)">夏利脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,2)">灰色</td><td id="tb" 
+ondblclick="CreateReturnValue(true,2)">套</td><td style="display: none;" 
+id="tb" onDblClick="CreateReturnValue(true,2)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,2)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,2)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,2)">1.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,2)">2.00</td></tr><tr 
+id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,3)">00012</td><td id="tb" 
+ondblclick="CreateReturnValue(true,3)">奇瑞脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,3)">灰色</td><td id="tb" 
+ondblclick="CreateReturnValue(true,3)">套</td><td style="display: none;" 
+id="tb" onDblClick="CreateReturnValue(true,3)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,3)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,3)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,3)">1.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,3)">3.00</td></tr><tr 
+id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,4)">00013</td><td id="tb" 
+ondblclick="CreateReturnValue(true,4)">机头水</td><td id="tb" 
+ondblclick="CreateReturnValue(true,4)">奇威</td><td id="tb" 
+ondblclick="CreateReturnValue(true,4)">桶</td><td style="display: none;" 
+id="tb" onDblClick="CreateReturnValue(true,4)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,4)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,4)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,4)">1.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,4)">6.00</td></tr><tr 
+id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,5)">00014</td><td id="tb" 
+ondblclick="CreateReturnValue(true,5)">手喷漆</td><td id="tb" 
+ondblclick="CreateReturnValue(true,5)">白色</td><td id="tb" 
+ondblclick="CreateReturnValue(true,5)">瓶</td><td style="display: none;" 
+id="tb" onDblClick="CreateReturnValue(true,5)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,5)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,5)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,5)">3.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,5)">1.67</td></tr><tr 
+id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,6)">00015</td><td id="tb" 
+ondblclick="CreateReturnValue(true,6)">手喷漆</td><td id="tb" 
+ondblclick="CreateReturnValue(true,6)">灰色</td><td id="tb" 
+ondblclick="CreateReturnValue(true,6)">瓶</td><td style="display: none;" 
+id="tb" onDblClick="CreateReturnValue(true,6)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,6)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,6)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,6)">3.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,6)">2.00</td></tr><tr 
+id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,7)">00016</td><td id="tb" 
+ondblclick="CreateReturnValue(true,7)">车锁</td><td id="tb" 
+ondblclick="CreateReturnValue(true,7)">金点8809</td><td id="tb" 
+ondblclick="CreateReturnValue(true,7)">支</td><td style="display: none;" 
+id="tb" onDblClick="CreateReturnValue(true,7)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,7)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,7)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,7)">1.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,7)">0.00</td></tr><tr 
+id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,8)">00017</td><td id="tb" 
+ondblclick="CreateReturnValue(true,8)">表板蜡</td><td id="tb" 
+ondblclick="CreateReturnValue(true,8)">豪威</td><td id="tb" 
+ondblclick="CreateReturnValue(true,8)">瓶</td><td style="display: none;" 
+id="tb" onDblClick="CreateReturnValue(true,8)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,8)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,8)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,8)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,8)">0.00</td></tr><tr 
+id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,9)">00018</td><td id="tb" 
+ondblclick="CreateReturnValue(true,9)">杂类用品</td><td id="tb" 
+ondblclick="CreateReturnValue(true,9)">R牌指南球166</td><td id="tb" 
+ondblclick="CreateReturnValue(true,9)">个</td><td style="display: none;" 
+id="tb" onDblClick="CreateReturnValue(true,9)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,9)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,9)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,9)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,9)">0.00</td></tr><tr 
+id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,10)">00019</td><td id="tb" 
+ondblclick="CreateReturnValue(true,10)">杂类用品</td><td id="tb" 
+ondblclick="CreateReturnValue(true,10)">R牌指南球301</td><td id="tb" 
+ondblclick="CreateReturnValue(true,10)">个</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,10)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,10)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,10)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,10)">1.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,10)">0.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,11)">00020</td><td id="tb" 
+ondblclick="CreateReturnValue(true,11)">挡泥板</td><td id="tb" 
+ondblclick="CreateReturnValue(true,11)">桑塔纳2000</td><td id="tb" 
+ondblclick="CreateReturnValue(true,11)">套</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,11)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,11)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,11)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,11)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,11)">0.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,12)">00021</td><td id="tb" 
+ondblclick="CreateReturnValue(true,12)">脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,12)">盘形薄小</td><td id="tb" 
+ondblclick="CreateReturnValue(true,12)">套</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,12)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,12)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,12)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,12)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,12)">0.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,13)">00022</td><td id="tb" 
+ondblclick="CreateReturnValue(true,13)">脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,13)">盘形新</td><td id="tb" 
+ondblclick="CreateReturnValue(true,13)">套</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,13)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,13)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,13)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,13)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,13)">0.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,14)">00023</td><td id="tb" 
+ondblclick="CreateReturnValue(true,14)">脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,14)">盘形厚</td><td id="tb" 
+ondblclick="CreateReturnValue(true,14)">套</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,14)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,14)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,14)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,14)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,14)">0.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,15)">00024</td><td id="tb" 
+ondblclick="CreateReturnValue(true,15)">脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,15)">盆形薄</td><td id="tb" 
+ondblclick="CreateReturnValue(true,15)">套</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,15)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,15)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,15)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,15)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,15)">0.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,16)">00025</td><td id="tb" 
+ondblclick="CreateReturnValue(true,16)">脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,16)">盆形厚</td><td id="tb" 
+ondblclick="CreateReturnValue(true,16)">套</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,16)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,16)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,16)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,16)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,16)">0.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,17)">00026</td><td id="tb" 
+ondblclick="CreateReturnValue(true,17)">脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,17)">新盆形</td><td id="tb" 
+ondblclick="CreateReturnValue(true,17)">套</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,17)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,17)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,17)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,17)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,17)">0.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,18)">00027</td><td id="tb" 
+ondblclick="CreateReturnValue(true,18)">脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,18)">福娃</td><td id="tb" 
+ondblclick="CreateReturnValue(true,18)">套</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,18)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,18)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,18)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,18)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,18)">0.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,19)">00028</td><td id="tb" 
+ondblclick="CreateReturnValue(true,19)">脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,19)">水晶方块</td><td id="tb" 
+ondblclick="CreateReturnValue(true,19)">套</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,19)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,19)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,19)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,19)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,19)">0.00</td></tr><tr
+ id="tr" onMouseOver="over()" onClick="change()" onMouseOut="out()" 
+align="center" bgcolor="#ffffff"><td id="tb" 
+ondblclick="CreateReturnValue(true,20)">00029</td><td id="tb" 
+ondblclick="CreateReturnValue(true,20)">脚垫</td><td id="tb" 
+ondblclick="CreateReturnValue(true,20)">水晶方块本田</td><td id="tb" 
+ondblclick="CreateReturnValue(true,20)">套</td><td style="display: none;"
+ id="tb" onDblClick="CreateReturnValue(true,20)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,20)">0.00</td><td id="tb" 
+ondblclick="CreateReturnValue(true,20)"></td><td id="tb" 
+ondblclick="CreateReturnValue(true,20)">0.0</td><td style="display: 
+none;" id="tb" onDblClick="CreateReturnValue(true,20)">0.00</td></tr></tbody></table><table
+ align="center" border="0" width="750px"><tbody><tr><th colspan="9" 
+align="left"> <font style="font-family: Webdings;">9 3</font> [1]  [<a 
+href="#" 
+onclick="document.form1.action='/lenobs/bsjxc/common/selectgoods.asp?depot=%BF%E2%B7%BF&amp;type=CG&amp;adddate=2010%2D4%2D18&amp;id=7&amp;page=2';document.form1.submit();">2</a>]
+  [<a href="#" 
+onclick="document.form1.action='/lenobs/bsjxc/common/selectgoods.asp?depot=%BF%E2%B7%BF&amp;type=CG&amp;adddate=2010%2D4%2D18&amp;id=7&amp;page=3';document.form1.submit();">3</a>]
+  [<a href="#" 
+onclick="document.form1.action='/lenobs/bsjxc/common/selectgoods.asp?depot=%BF%E2%B7%BF&amp;type=CG&amp;adddate=2010%2D4%2D18&amp;id=7&amp;page=4';document.form1.submit();">4</a>]
+  [<a href="#" 
+onclick="document.form1.action='/lenobs/bsjxc/common/selectgoods.asp?depot=%BF%E2%B7%BF&amp;type=CG&amp;adddate=2010%2D4%2D18&amp;id=7&amp;page=5';document.form1.submit();">5</a>]
+ <font style="font-family: Webdings;"><a href="#" 
+onclick="document.form1.action='/lenobs/bsjxc/common/selectgoods.asp?depot=%BF%E2%B7%BF&amp;type=CG&amp;adddate=2010%2D4%2D18&amp;id=7&amp;page=2';document.form1.submit();">4</a>
+ <a href="#" 
+onclick="document.form1.action='/lenobs/bsjxc/common/selectgoods.asp?depot=%BF%E2%B7%BF&amp;type=CG&amp;adddate=2010%2D4%2D18&amp;id=7&amp;page=105';document.form1.submit();">:</a></font>
+ [页次:1/105页] [共2082条] [20条/页]
+<script>
+function tiaozhuan(){
+var yema=document.getElementById("yema").value
+document.form1.action='/lenobs/bsjxc/common/selectgoods.asp?depot=%BF%E2%B7%BF&type=CG&adddate=2010%2D4%2D18&id=7&page='+yema;
+document.form1.submit();
+}
+</script>
+ 转到第：<input id="yema" size="1" type="text">页<label class="button1"><input
+ value="GO" onClick="tiaozhuan()" type="button"></label> <label 
+class="button1"><input value="Excel" type="submit"></label></th></tr></tbody></table></form>
+</body></html>

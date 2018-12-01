@@ -1,0 +1,221 @@
+<html><head>
+
+<script language="JavaScript" src="../js/date.js"></script>
+<script language="JavaScript" src="../js/xmlhttp.js"></script>
+<script language="JavaScript" src="../js/order.js"></script>
+<script language="JavaScript" src="../js/showphoto.js"></script><script language="JavaScript" src="../js/addrow.js"></script><script language="JavaScript" src="../js/jquery.js"></script><script>
+function   change()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+for(var   i=1;   i<document.all.tbl.rows.length;   i++)
+{
+document.all.tbl.rows[i].style.backgroundColor   =   "";
+document.all.tbl.rows[i].tag   =   false;
+}
+oTr.style.backgroundColor   =   "#CCCCFF";   
+oTr.tag   =   true;
+}
+}
+
+function   out()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+
+function   over()
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+
+function addtext(i_row,str)
+{
+document.getElementById("temp").value=str;
+}
+
+function GetDIV(oobj,val_i,str)
+{
+if (oobj == 'block')
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td")
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "#E1E9FD";
+}
+}
+else
+{
+var   oObj   =   event.srcElement;
+if(oObj.tagName.toLowerCase()   ==   "td") 
+{
+var   oTr   =   oObj.parentNode;
+if(!oTr.tag)   oTr.style.backgroundColor   =   "";
+}
+}
+ document.getElementById("search_suggest").style.display=oobj;
+ document.getElementById("temp1").value = str;
+ document.getElementById("search_suggest").style.top=event.clientY+20+document.body.scrollTop;
+ document.getElementById("search_suggest").style.left=event.clientX+20+document.body.scrollLeft;
+}
+
+function CreateReturnValue(closeWindow,i){
+j=window.opener.document.all.sqd.rows.length;
+newRow=window.opener.document.all.sqd.insertRow(-1)
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML=j
+window.opener.document.getElementById("rowcount").value=j
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=delNumber type=radio >"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodscode"+j+" type=text class=INPUT1 id=goodscode"+j+" size=8 onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsname"+j+" type=text class=INPUT1 id=goodsname"+j+"  size=16  onClick=edit_row("+j+")>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=goodsunit"+j+" type=text class=INPUT1 id=goodsunit"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=units"+j+" type=text class=INPUT1 id=units"+j+"  size=3>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=price"+j+" type=text class=INPUT1 id=price"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input onpropertychange=count("+j+") name=number"+j+" type=text class=INPUT1 id=number"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=money"+j+" type=text class=INPUT1 id=money"+j+"  size=8>"
+newcell=newRow.insertCell()
+newcell.style.backgroundColor='#f7f7f7'
+newcell.innerHTML="<input name=remark"+j+" type=text class=INPUT1 id=remark"+j+"  size=20><input name=aveprice"+j+" type=hidden class=INPUT1 id=aveprice"+j+"  size=20><input name=fact_num"+j+" type=hidden id=fact_number"+j+">"
+var goodscode=window.opener.document.getElementById("goodscode"+j);
+var goodsname=window.opener.document.getElementById("goodsname"+j);
+var goodsunit=window.opener.document.getElementById("goodsunit"+j);
+var units=window.opener.document.getElementById("units"+j);
+var remark=window.opener.document.getElementById("remark"+j);
+var number=window.opener.document.getElementById("number"+j);
+var price=window.opener.document.getElementById("price"+j);
+var aveprice=window.opener.document.getElementById("aveprice"+j);
+var fact_num=window.opener.document.getElementById("fact_num"+j);
+goodscode.value=document.getElementById('tbl').rows[i].cells[0].innerHTML;
+goodsname.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+goodsunit.value=document.getElementById('tbl').rows[i].cells[2].innerText;
+units.value=document.getElementById('tbl').rows[i].cells[3].innerText;
+remark.value=document.getElementById('tbl').rows[i].cells[6].innerText;
+aveprice.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+fact_num.value=document.getElementById('tbl').rows[i].cells[7].innerText;	 
+number.value=1;
+if ("fk"=="XS")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+}
+else if ("fk"=="XD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[5].innerText;
+} 
+else if ("fk"=="CG")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if ("fk"=="CD")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 
+else if ("fk"=="in")
+{
+price.value=document.getElementById('tbl').rows[i].cells[4].innerText;
+} 	 
+else
+{
+price.value=document.getElementById('tbl').rows[i].cells[8].innerText;
+}
+//document.getElementById('tbl').deleteRow(i);
+document.getElementById('tbl').rows[i].style.display="none";
+}
+</script><script>
+function CreateReturnValue(closeWindow,i)
+　　 {
+　　 var bill=window.opener.document.getElementById("bill");
+var cust=window.opener.document.getElementById("Cust");
+var mon=window.opener.document.getElementById("mon");
+bill.value=document.getElementById('tbl').rows[i].cells[1].innerHTML;
+cust.value=document.getElementById('tbl').rows[i].cells[3].innerHTML;
+mon.value=document.getElementById('tbl').rows[i].cells[5].innerHTML;
+　　 if (closeWindow)
+　　 {
+　　 window.opener=null;
+　　 window.close();
+　　 }
+　　 }
+function CheckValue()
+{
+alert('请填写制单日期！');
+}
+</script><meta http-equiv="Content-Type" content="text/html; 
+charset=GB2312"><link rel="stylesheet" 
+href="../css/style.css" type="text/css"><title>单据选择</title></head><body><span
+ id="hintdiv" style="display: none; position: absolute; z-index: 500;"></span>
+
+
+
+
+
+
+
+
+
+
+
+
+<table border="0" width="100%">
+  <tbody><tr>
+    <td><form name="sample" method="post" >
+      日期从
+      <label>
+      <input name="date1" size="16" value="2010-4-1" type="text"><input 
+src="../images/date.gif" style="" 
+onclick="setDay(date1);return false;" type="image" height="16" 
+width="18">
+      </label>
+     到
+     <label>
+     <input name="date2" size="16" value="2010-4-18" type="text"><input 
+src="../images/date.gif" style="" 
+onclick="setDay(date2);return false;" type="image" height="16" 
+width="18">
+     </label>    
+     <label>
+     <input name="Submit" class="button" value=" 查 找 " type="submit">
+     </label>
+    </form>    </td>
+  </tr>
+</tbody></table>
+      <table id="tbl" empty-cells:show="" align="center" 
+bgcolor="#000000" border="1" cellpadding="3" cellspacing="0" 
+width="100%">
+      <tbody><tr style="background-color: rgb(153, 153, 153); 
+border-bottom: 2px solid black; height: 25px;" align="center" 
+bgcolor="#ffffff">
+	  <th>行号</th><th>单号</th><th>日期</th><th>供应商/客户名称</th><th>金额</th><th>未付金额</th></tr>
+      <tr >
+	  <td>123</td><td>XD-GDD-111</td><td>2010-1-2</td><td>asdf</td><td>1111</td><td>1111</td></tr>
+	  
+</tbody></table>
+</body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML><HEAD><TITLE>往来单位</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 6.00.6000.16981" name=GENERATOR></HEAD>
+<BODY bgColor=#f3f1e9>　　
+<SCRIPT>
+     function check(){
+     if (document.cust.custname.value=="")
+     {
+     alert("请输入往来单位名称！");
+     document.cust.custname.focus();
+     return false; 
+     }
+     }
+　　 </SCRIPT>
+ <LINK href="../css/style.css" type=text/css rel=stylesheet>
+<DIV align=center><SPAN class=style1>往来单位资料</SPAN></DIV>
+<FORM name=cust onSubmit="return check()" 
+method=post>
+<TABLE width=600 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD align=right width=101>往来单位名称</TD>
+    <TD align=left width=189><INPUT id=custname size=16 name=custname><FONT 
+      color=#ff0000>*</FONT></TD>
+    <TD align=right width=100>联系人</TD>
+    <TD align=left width=192><INPUT id=contact size=16 name=contact></TD></TR>
+  <TR>
+    <TD align=right>地址</TD>
+    <TD align=left><INPUT id=address size=16 name=address></TD>
+    <TD align=right>电话</TD>
+    <TD align=left><INPUT id=tel size=16 name=tel></TD></TR>
+  <TR>
+    <TD align=right>邮编</TD>
+    <TD align=left><INPUT id=zio size=16 name=zip></TD>
+    <TD align=right>传真</TD>
+    <TD align=left><INPUT id=fax size=16 name=fax></TD></TR>
+  <TR>
+    <TD align=right>往来单位分类</TD>
+    <TD align=left><INPUT id=nodename size=13 name=nodename><A 
+      onclick="window.open ('../System/tree.htm', 'newwindow', 'height=400, width=200,toolbar=no,menubar=no,scrollbars=yes,resizable=no,location=no, status=no')" 
+      href="#"><IMG 
+      height=8 src="../images/choose.gif" width=21 
+      border=0></A></LABEL><INPUT id=typecode type=hidden name=typecode> </TD>
+    <TD align=right>E_MAIL</TD>
+    <TD align=left><INPUT id=email size=16 name=email></TD></TR>
+  <TR>
+    <TD align=right>开户银行</TD>
+    <TD align=left><INPUT id=bankname size=16 name=bankname></TD>
+    <TD align=right>手机</TD>
+    <TD align=left><INPUT id=mobile size=16 name=mobile></TD></TR>
+  <TR>
+    <TD align=right>银行账号</TD>
+    <TD align=left><INPUT id=BankAccount size=16 name=BankAccount></TD>
+    <TD align=right>纳税号</TD>
+    <TD align=left><INPUT id=taxcode size=16 name=taxcode></TD></TR>
+  <TR>
+    <TD align=right>法人代表</TD>
+    <TD align=left><INPUT id=fr size=16 name=fr></TD>
+    <TD align=right>网址</TD>
+    <TD align=left><INPUT id=url size=16 name=url></TD></TR>
+  <TR>
+    <TD align=right>备注</TD>
+    <TD align=left colSpan=3><INPUT id=memo size=59 name=memo></TD></TR>
+  <TR>
+    <TD align=right 
+colSpan=2><INPUT class=button type=submit value=" 保 存 "></TD>
+    <TD colSpan=2>&nbsp; 
+  <INPUT class=button type=reset value=" 重 置 "></TD></TR></TBODY></TABLE></FORM></BODY></HTML>
